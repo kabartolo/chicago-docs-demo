@@ -1,0 +1,341 @@
+---
+title: Menus
+description: 'A guide to customizing the main menu and sidebar menus'
+---
+
+<TwoColumnSection>
+
+## Overview
+
+This section describes how to create your site's main menu (the menu that appears in the header) and how to add docs to the sidebar navigation menu.
+
+Both the main menu and the sidebar menu(s) are specified in the `@kabartolo/gatsby-theme-chicago-docs` options in the `gatsby-config.js` file for your site.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Main Menu
+
+The main menu is the menu that appears in the header. In your `gatsby-config.js` theme options, add an an array of objects called `mainMenu`.  Each object should have a `name` and `path`.
+
+Omit this field if you don't want a main menu for your site.
+
+<Alert>
+
+For consistency with paths created by Gatsby, paths should include starting and ending slashes (`/`).
+
+</Alert>
+
+---
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js {7}
+module.exports = {
+  plugins: [
+    {
+      resolve: '@kabartolo/gatsby-theme-chicago-docs',
+      options: {
+        menus: {
+          mainMenu: [
+            {
+              name: 'Home',
+              path: '/',
+            },
+            {
+              name: 'Docs',
+              path: '/docs/',
+            },
+            {
+              name: 'Tutorials',
+              path: '/tutorials/',
+            },
+          ],
+        },
+      },
+    },
+  ],
+}
+
+```
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Sidebar Menu
+
+The sidebar menu lists the files that make up your project's documentation. This list is displayed in the sidebar, but it is also used on each doc page to create the breadcrumb links and the links to previous and next docs.
+
+When displayed in the sidebar, the menu can organize doc files into **groups** (i.e., accordions) that can be expanded and collapsed. This helps make it easy to navigate your docs.
+
+By default, single posts are also displayed as accordions that expand to show part of their table of contents. To disable this, set `sidebarAllowTOC` to `false` in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. Also by default, multiple accordions can be open at the same time. You can disable this by setting `sidebarAllowMultipleOpen` to `false` (only one accordion will thenbe open at a time).
+
+You can also change the nested accordion depth with `sidebarDepth` (default: 3) in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. This is the total depth including groups and table of contents.
+
+<Alert>
+
+Groups and single posts can be styled differently to visually distinguish them. <a href="/docs/styling-and-shadowing/#theme-ui">Shadow</a> the Theme-UI `links.accordion` and `links.accordionGroup` values to adjust accordion link and group styles, respectively.
+
+</Alert>
+
+To create a sidebar menu, add an array called `sidebarMenus` to `gatsby-config.js` with the following properties:
+
+<TwoColumnSection>
+
+<PropertyTable title="sidebarMenus properties">
+
+| Name | Type | Info | Default | Description |
+| --- | --- | --- | --- | --- |
+| `name` | string | optional | `''` (empty string) | Used in the breadcrumb link (e.g., `'Tutorials'`). This breadcrumb link will not appear if `name` is omitted. |
+| `sidebarLabel` | string | optional | value of `name` | Label appearing in the sidebar header (e.g., `'Tutorials'`). Useful when there are multiple sidebar menus. If omitted, uses the value of the `name` field. If set to `''` (empty string), the sidebar header will not render. |
+| `dropdownLabel` | string | optional | value of `name` | Label appearing in the dropdown docs menu on mobile (e.g., `'Menu'`). If omitted, uses the value of the `name` field. If set to `''` (empty string), no label will appear. |
+| `slug` | string | optional | `''` (empty string) | The directory **within** <a href="/docs/configuration/site-options/#theme-options">`docsPath`</a> containing the docs for this menu (e.g., `'tutorials'` for `src/docs/tutorials`). |
+| `items` | string | optional | |  List of docs in custom order to be displayed in the menu. If omitted, the sidebar will be populated automatically from the `slug` directory, but nested groups can be created only from nested directories with an `index.mdx` file. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="Directory structure for example below">
+
+```
+src
+└── docs
+     └──tutorials
+        ├── jekyll
+        │   ├── how-to-install-plugins.mdx
+        │   ├── jekyll-quick-start.mdx
+        │   ├── index.mdx
+        ├── gatsby
+        |   ├── gatsby-quick-start.mdx
+        │   ├── how-to-install-plugins.mdx
+        │   ├── index.mdx
+        ├── how-to-write-tutorials.mdx
+        └── index.mdx
+```
+
+</CodeExample>
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js {6-13}num
+module.exports = {
+  plugins: [
+    {
+      resolve: '@kabartolo/gatsby-theme-chicago-docs',
+      options: {
+        sidebarMenus: [
+          {
+            name: 'Tutorials',
+            slug: 'tutorials',
+            dropdownLabel: 'Menu',
+            items: [
+              //...
+            ],
+          }, 
+        ],
+      },  
+    },
+  ],
+}
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+Each item in the `items` list can have the following properties:
+
+<TwoColumnSection>
+
+<PropertyTable title="Item properties">
+
+| Name | Type | Info | Default | Description |
+| --- | --- | --- | --- | --- |
+| `name` | string | optional | value of frontmatter `shortTitle` or `title` for the doc (or for the `index.mdx` file of a group) | Label for the doc or group of docs in the sidebar (e.g., `'Gatsby Tutorials'`). Also used in the breadcrumb link for this part of the path. |
+| `slug` | string | required | | Slug for a single doc (e.g., `'how-to-write-tutorials'`) or the directory for a group of docs (e.g., `'jekyll'`).
+| `isGroup` | boolean | optional | `false` | Whether this item represents a directory of docs. |
+| `items` | array of objects | optional | all docs in `slug` directory | List of docs in custom order to be displayed in the menu. If omitted, all docs in this directory are added automatically. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="Directory structure for example below">
+
+```
+src
+└── docs
+     └──tutorials
+        ├── jekyll
+        │   ├── how-to-install-plugins.mdx
+        │   ├── jekyll-quick-start.mdx
+        │   ├── index.mdx
+        ├── gatsby
+        |   ├── gatsby-quick-start.mdx
+        │   ├── how-to-install-plugins.mdx
+        │   ├── index.mdx
+        ├── how-to-write-tutorials.mdx
+        └── index.mdx
+```
+
+</CodeExample>
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js {12,15-19}num
+module.exports = {
+  plugins: [
+    {
+      resolve: '@kabartolo/gatsby-theme-chicago-docs',
+      options: {
+        sidebarMenus: [
+          {
+            name: 'Tutorials',
+            dropdownLabel: 'Menu',
+            items: [
+              {
+                slug: 'how-to-write-tutorials',
+              }
+              {
+                name: 'Jekyll Tutorials',
+                slug: 'jekyll',
+                isGroup: true,
+                // items in custom order
+                items: [
+                  {
+                    slug: 'jekyll-quick-start',
+                  },
+                  {
+                    slug: 'how-to-install-plugins',
+                  },
+                ],
+              },
+              {
+                name: 'Gatsby Tutorials',
+                slug: 'gatsby',
+                isGroup: true,
+                // items in folder added automatically
+              },
+            ],
+          }, 
+        ],
+      },  
+    },
+  ],
+}
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Multiple Sidebar Menus
+
+You can define multiple sidebar menus for different parts of your site, grouped according to the base path of the docs (e.g., `/tutorials`).
+
+<TwoColumnSection>
+
+In this example, the first sidebar menu will appear for any docs with a base path of `/docs` (e.g., `example.com/docs/gatsby/mdx-guide`, while the second will appear for any docs with a base path of `/tutorials` (e.g., `example.com/tutorials/how-to-write-tutorials`):
+
+```
+src
+├───docs
+    ├── docs
+    │   ├── gatsby
+    │   │   ├── index.mdx
+    │   │   ├── mdx-guide.mdx
+    │   │   ├── quick-start.mdx
+    │   ├── index.mdx
+    │   ├── overview.mdx
+    └── tutorials
+        ├── jekyll
+        │   ├── how-to-install-plugins.mdx
+        │   ├── jekyll-quick-start.mdx
+        │   ├── index.mdx
+        ├── gatsby
+        |   ├── gatsby-quick-start.mdx
+        │   ├── how-to-install-plugins.mdx
+        │   ├── index.mdx
+        ├── how-to-write-tutorials.mdx
+        └── index.mdx
+```
+
+---
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js {8,24}
+module.exports = {
+  plugins: [
+    {
+      resolve: '@kabartolo/gatsby-theme-chicago-docs',
+      options: {
+        sidebarMenus: [
+          {
+            name: 'Documentation',
+            sidebarLabel: 'Docs',
+            slug: 'docs',
+            items: [
+              {
+                slug: 'overview',
+              },
+              {
+                name: 'Usage with Gatsby',
+                slug: 'gatsby',
+                isGroup: true,
+                // items in folder added automatically
+              },
+            ],
+          },
+          {
+            name: 'Tutorials',
+            slug: 'tutorials',
+            items: [
+              {
+                slug: 'how-to-write-tutorials',
+              }
+              {
+                name: 'Jekyll Tutorials',
+                slug: 'jekyll',
+                isGroup: true,
+                // items in custom order
+                items: [
+                  {
+                    slug: 'jekyll-quick-start',
+                  },
+                  {
+                    slug: 'how-to-install-plugins',
+                  },
+                ],
+              },
+              {
+                name: 'Gatsby Tutorials',
+                slug: 'gatsby',
+                isGroup: true,
+                // items in folder added automatically
+              },
+            ],
+          },
+        },
+      },
+    },
+  ],
+}
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+</TwoColumnSection>

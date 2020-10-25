@@ -1,0 +1,226 @@
+---
+title: 'Site options'
+description: 'Site customization and configuration in the gatsby-config.js file'
+showTOC: false
+---
+
+<TwoColumnSection>
+
+## Overview
+
+This section describes the options that help customize your site.
+
+The default options will create a site with all the features shown in this demo. You can <a href="#theme-options">turn off features</a> such as the searchbar if you prefer. You can also turn off the table of contents and other <a href="#frontmatter">features for individual posts</a>.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Folder Structure
+
+The `src` folder for your site contains your docs, pages, and assets (such as images).
+
+All documentation files should be placed in the `docsPath` directory (default `src/docs`) defined in the <a href="#theme-options">theme options</a>. These files will be displayed using the Doc template in `@kabartolo/gatsby-theme-chicago-docs`, with sidebar navigation, breadcrumb links, and previous/next navigation, as well as a table of contents. These features can be <a href="#frontmatter">turned off</a> for individual posts.
+
+You can further organize your docs within the `src/docs` folder, such as `src/docs/api` and `src/docs/tutorials`. These nested folders can form <a href="/docs/configuration/menus/#sidebar-menu">groups of docs</a> in the sidebar menu, or you can create separate <a href="/docs/configuration/menus/#multiple-sidebar-menus">sidebar menus</a> for each nested folder.
+
+Place assets such as images and your site logo in `src/assets`, or the `assetsPath` defined in the <a href="#theme-options">theme options</a>.
+
+The `src/pages` directory contains non-docs pages on your site, such as `404.js`. Any MDX files in this folder will be processed by `gatsby-plugin-mdx` but will not use the Doc page template (and will therefore **not** contain breadcrumb links, sidebar navigation, or previous/next navigation).
+
+---
+
+<CodeExample title="Example directory structure">
+
+``` {6}
+site
+└── src
+    ├── assets
+    │   ├── chicago-docs-logo.png
+    ├── docs
+    │   ├── api
+    │   │   ├── index.mdx
+    │   │   └── methods.mdx
+    │   └── tutorials
+    │       ├── index.mdx
+    │       └── tutorial1.mdx
+    └── pages
+        ├── 404.js
+        └── index.js
+```
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Site Metadata
+
+Set your site's metadata in the `gatsby-config.js` file for your site. Some of these fields are used in the SEO component, which uses <a href="https://github.com/nfl/react-helmet">React Helmet</a> to create your site's meta tags. 
+
+<TwoColumnSection>
+
+<PropertyTable title="Metadata fields">
+
+| Name | Type | Info | Default | Description |
+| --- | --- | --- | --- | --- |
+| `title` | string | optional |  `''` (empty string) | Used to set the meta title tag for your site. Also appears in the browser tab and next to the logo in the header. |
+| `description` | string | optional | `''` (empty string) | Used to set the meta description tag for your site. |
+| `siteLanguage` | string | optional | `''` (empty string) | Used to set the meta language tag for your site. |
+| `siteLogo` | string | optional | `''` (empty string) |  Filename for your logo, which should live in `src/assets` (or the `assetsPath` <a href="#theme-options">theme option</a>). This creates a logo that appears to the left of the site title with a fixed height of 30px. To customize the logo further, <a href="/docs/styling-and-shadowing/#component-example">shadow</a> the Logo component in `@kabartolo/gatsby-theme-chicago-docs/src/components/Layout/Header/logo.js`. |
+| `siteUrl` | string | optional | `''` (empty string) |  Used to set the canonical URL for your site. |
+| `githubUrl` | string | optional | `''` (empty string) | Used to create a GitHub icon in the header that opens your GitHub project in a new tab. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js
+module.exports = {
+  siteMetadata: {
+    title: 'Your Site Title',
+    description: 'Brief description of your site and project',
+    siteLanguage: 'en',
+    siteLogo: 'logo.png',
+    siteUrl: 'localhost:8000',
+    githubUrl: `https://www.github.com/repository/your-project`,
+  },
+};
+
+```
+</CodeExample>
+
+</TwoColumnSection>
+
+<Alert>
+
+You can <a href="/docs/styling-and-shadowing/#component-example">shadow</a> the SEO component to add more meta tags and/or improve the SEO for your site.
+
+</Alert>
+
+The Chicago Docs Gatsby Starter also comes with <a href="https://www.gatsbyjs.com/plugins/gatsby-plugin-manifest/">`gatsby-plugin-manifest`</a>. This plugin is also used to create your site's favicon. This plugin must also be configured in your `gatsby-config.js` file:
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js
+module.exports = {
+  //...
+  {
+    resolve: 'gatsby-plugin-manifest',
+    options: {
+      name: 'Your Site Title',
+      short_name: 'Shorter Title',
+      start_url: '/',
+      background_color: '#fff',
+      theme_color: '#eee',
+      display: 'standalone',
+      icon: 'src/assets/favicon.ico', // creates a favicon
+    },
+  },
+};
+
+```
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Theme Options
+
+Several theme options help you customize how your site behaves.
+
+<PropertyTable title="Theme options">
+
+| Name | Type | Info | Default | Description |
+| --- | --- | --- | --- | --- |
+| `assetsPath` | string | optional | `src/assets` | Directory for all assets used in your site. |
+| `basePath` | string | optional | `''` (empty string) | Base path of your docs site, such as `/docs`. |
+| `docsPath` | string | optional | `src/docs` |  Directory for all MDX docs for your site (i.e., MDX files that should use the Doc page component). |
+| `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
+| `sidebarMenus` | array of objects | optional | `[]` | List of menus that will appear in the sidebar of your site (see <a href="/docs/configuration/menus/#sidebar-menu">Configuration: Sidebar Menu</a>). |
+| `allowDocsSearch` | boolean | optional | `true` |  Whether a search index is populated with MDX files from the `docsPath` folder and whether a searchbar appears in the header. |
+| `alwaysShowBreadcrumb` | boolean | optional | `true` | Whether breadcrumb links are always displayed at the top of each doc. Can be overridden by the <a href="#frontmatter">`showBreadcrumb`</a> frontmatter field for an individual doc.|
+| `alwaysShowPostNav` | boolean | optional | `true` | Whether to always show links to the previous and next docs at the bottom of a doc page. Can be overridden by the <a href="#frontmatter">`showPostNav`</a> frontmatter field for an individual doc. |
+| `alwaysShowSidebar` | boolean | optional | `true` | Whether to always show the sidebar for docs. Can be overridden by the <a href="#frontmatter">`showSidebar`</a> frontmatter field for an individual doc. |
+| `alwaysShowTOC` | boolean | optional | `true` | Whether to always show the table of contents (TOC component) for each doc. Can be overridden by the <a href="#frontmatter">`showTOC`</a> frontmatter field for an individual doc. |
+| `primaryResultsOnly` | boolean | optional | `false` | When searching, whether to show only only matches in the title, description, and/or header. If set to `false`, will also show paragraph matches. |
+| `sidebarAllowMultipleOpen` | boolean | optional | `true` | Whether multiple accordion menus in the sidebar can be open at the same time. |
+| `sidebarAllowTOC` | boolean | optional | `true` | Whether to show a dropdown table of contents for each doc in the sidebar. |
+| `sidebarDepth` | number | optional | `3` | Total depth of nested accordions to display in the sidebar (including table of contents). |
+| `skipMDXConfig` | boolean | optional | `false` | Whether to skip `gatsby-plugin-mdx` configuration for the theme. |
+| `toggleTheme` | boolean | optional | `true` | Whether a theme toggle button should be shown in the header. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
+
+```js
+module.exports = {
+  plugins: [
+    {
+      resolve: '@kabartolo/gatsby-theme-chicago-docs',
+      options: {
+        docsPath: `{__dirname}/content/docs`,
+        allowDocsSearch: false,
+        alwaysShowTOC: false,
+        sidebarAllowMultipleOpen: false,
+        toggleTheme: false,
+      }
+    }
+  ]
+}
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Frontmatter
+
+The frontmatter fields for a Chicago Docs doc post include `title` and `description` values and boolean values that determine whether to display the table of contents or another feature.
+
+<PropertyTable title="Frontmatter fields">
+
+| Name | Type | Info | Default | Description |
+| --- | --- | --- | --- | --- |
+| `title` | string | optional | value of `shortTitle` or 'Untitled' | Title of the doc. Used in the meta title tag and appears at the top of the doc and in the browser tab. |
+| `shortTitle` | string | optional | `''` (empty string) | Shorter title used in place of the `title` field in doc navigation (e.g., in the sidebar). |
+| `description` | string | optional | `''` (empty string) | Description of the doc. Used in the search index and in the meta description tag for the page. |
+| `showBreadcrumb` | boolean | optional | value of `alwaysShowBreadcrumb` | Whether the breadcrumb links appear at the top of this doc. |
+| `showPostNav` | boolean | optional | value of `alwaysShowPostNav` | Whether links to the previous and next docs appear at the bottom of this doc. |
+| `showSidebar` | boolean | optional | value of `alwaysShowSidebar` | Whether the sidebar should appear for this doc. |
+| `showTOC` | boolean | optional | value of `alwaysShowTOC` | Whether the standalone table of contents (the TOC component) should appear for this doc. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="Post example" labels={[ 'JavaScript' ]}>
+
+```js
+---
+title: Title for your doc
+shortTitle: Alternate (shorter) title used in navigation
+description: Brief description of the doc (used in metadata and search index)
+showTOC: false
+showPostNav: false
+---
+
+## The first header should be an h2
+
+This doc will not show previous/next navigation or a table of contents since `showPostNav`
+and `showTOC` are set to `false`.
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>

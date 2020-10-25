@@ -1,0 +1,59 @@
+---
+title: Search
+description: 'How the docs search works and how to turn it off'
+---
+
+<section>
+
+## Overview
+
+This theme comes with a docs search that is designed for small sites. If your documentation is extensive, you might find an <a href="#using-algolia-or-another-search-interface">alternative search library</a> works better for your project.
+
+</section>
+
+<section>
+
+## How the Theme Search Works
+
+During the build process, an index of paragraphs and headers is created for each post. These data, along with the post's title and description, are used by `gatsby-plugin-elasticlunr-search` to build a search index for the site. This index is stored in `allSiteSearchIndex` in GraphQL.
+
+Only posts living in `src/docs` (or the `docsPath` set in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) are indexed.
+
+As a user inputs a search query, this search index is crawled for a match of the **exact** search query. Matches are ordered based on the following boost values:
+
+<CodeExample title="Search/index.js" labels={['JavaScript']}>
+
+```js
+searchIndex.search(query, {
+  fields: {
+    title: { boost: 3 },
+    description: { boost: 2 },
+    headers: { boost: 2 },
+    paragraphs: { boost: 1 },
+  },
+});
+```
+
+</CodeExample>
+
+If <a href="/docs/configuration/site-options/#theme-options">`primaryResultsOnly`</a> is set to `true`, matches in the title, description, and/or headers are presented, but no paragraph matches are included.
+
+For a demonstration, try searching for 'mdx' in the demo site.
+
+</section>
+
+<section>
+
+## Using Algolia or Another Search Interface
+
+There are faster and more robust solutions to documentation search out there. I recommend <a href="https://docsearch.algolia.com/">DocSearch by Algolia</a>, which is **free** for docs sites.
+
+To use a different search interface, 
+
+1. Set `allowDocsSearch` to false in the `gatsby-config.js` theme options. This prevents the theme from fully populating the search index stored in GraphQL and from showing the theme searchbar.
+
+2. <a href="/docs/styling-and-shadowing/#component-example">Shadow</a> the Search component to create one that works with your custom library. For example, <a href="https://docsearch.algolia.com/docs/dropdown/">Algolia</a> provides functions and components to display its search results.
+
+3. Shadow the component (e.g., Header) that will display the custom Search component.
+
+</section>

@@ -1,0 +1,601 @@
+---
+title: Example API Doc
+description: 'Demonstration of CodeExample, Section, PropertyTable and other components in an example API doc'
+---
+
+<TwoColumnSection>
+
+The <a href="https://reqres.in/">Reqres</a> API is a REST API with consistent resource-oriented URLs. Its purpose is to provide sample data for testing, prototyping, and even writing fake API documentation like this.
+
+This API uses standard HTTP methods (or verbs): GET, POST, PUT, PATCH, and DELETE. It is <a href="https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS">CORS-enabled</a>, accepts <a href="https://www.json.org/json-en.html">JSON-encoded</a> request data (content type `application/json`), and returns JSON-encoded responses.
+
+This API has two resources:
+
+<TOC depth={2} />
+
+Access to this API is free and available 24/7. Reqres does **not** store request data.
+
+---
+
+<CodeExample title="BASE URL">
+
+```
+https://reqres.in/api/
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+## The User Resource
+
+<TwoColumnSection>
+
+A **User** resource represents a fake user with attributes such as `first_name` and `email`. Use this resource when you need sample user data for a project.
+
+<PropertyTable title="User attributes">
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | number | Unique identifier for the user. |
+| `email` | string | A fake email address that might be used to authenticate the user if the data were real. |
+| `first_name` | string | A fake first name for the user. |
+| `last_name` | string | A fake last name for the user. |
+| `avatar` | string | URL for an image from <a href="https://uifaces.co/">UI Faces</a> for use in design mockups. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="BASE URL">
+
+```
+/api/users/
+```
+
+</CodeExample>
+
+<CodeExample title="THE USER OBJECT" labels={['JSON']}>
+
+```
+{
+  "id": 7,
+  "email": "michael.lawson@reqres.in",
+  "first_name": "Michael",
+  "last_name": "Lawson",
+  "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/follettkyle/128.jpg"
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Retrieve a specific user
+
+```
+GET /api/users/:id
+```
+
+To retrieve a specific user, make a GET request to this endpoint and provide the user's `id`.
+
+---
+
+<CodeExample
+  title="GET /api/users/:id"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl 'https://reqres.in/api/users/2'
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/users/2',
+  type: 'GET',
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 200" labels={['JSON']}>
+
+```json
+{
+  "data": {
+    "id": 2,
+    "email": "janet.weaver@reqres.in",
+    "first_name": "Janet",
+    "last_name": "Weaver",
+    "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/josephstein/128.jpg"
+  },
+  "ad": {
+    "company": "StatusCode Weekly",
+    "url": "http://statuscode.org/",
+    "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+  }
+}
+```
+
+</CodeExample>
+
+<CodeExample title="STATUS: 404" labels={['JSON']}>
+
+```json
+{}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Retrieve a list of users
+
+```
+GET /api/users/
+```
+
+To retrieve a list of users, make a GET request to this endpoint. Optionally provide the page number and/or the number of users per page. The total number of users available is 12.
+
+<PropertyTable title="Parameters">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `page` | number | optional | `1` | The page number of results to be returned. |
+| `per_page` | number | optional | `6` | The number of users per page to return. |
+
+</PropertyTable>
+
+---
+
+<CodeExample
+  title="GET /api/users?page=:page"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl 'https://reqres.in/api/users?page=2'
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/users?page=2',
+  type: 'GET',
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 200" labels={['JSON']}>
+
+```json
+{
+  "page": 2,
+  "per_page": 6,
+  "total": 12,
+  "total_pages": 2,
+  "data": [
+    {
+      "id": 7,
+      "email": "michael.lawson@reqres.in",
+      "first_name": "Michael",
+      "last_name": "Lawson",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/follettkyle/128.jpg"
+    },
+    {
+      "id": 8,
+      "email": "lindsay.ferguson@reqres.in",
+      "first_name": "Lindsay",
+      "last_name": "Ferguson",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/araa3185/128.jpg"
+    },
+    {
+      "id": 9,
+      "email": "tobias.funke@reqres.in",
+      "first_name": "Tobias",
+      "last_name": "Funke",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/vivekprvr/128.jpg"
+    },
+    {
+      "id": 10,
+      "email": "byron.fields@reqres.in",
+      "first_name": "Byron",
+      "last_name": "Fields",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/russoedu/128.jpg"
+    },
+    {
+      "id": 11,
+      "email": "george.edwards@reqres.in",
+      "first_name": "George",
+      "last_name": "Edwards",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/mrmoiree/128.jpg"
+    },
+    {
+      "id": 12,
+      "email": "rachel.howell@reqres.in",
+      "first_name": "Rachel",
+      "last_name": "Howell",
+      "avatar": "https://s3.amazonaws.com/uifaces/faces/twitter/hebertialmeida/128.jpg"
+    }
+  ],
+  "ad": {
+    "company": "StatusCode Weekly",
+    "url": "http://statuscode.org/",
+    "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+  }
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Create a new user
+
+```
+POST /api/users/
+```
+
+To create a new user, make a POST request to this endpoint with any JSON data you want.
+
+---
+
+<CodeExample
+  title="POST /api/users/"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl --header "Content-Type: application/json" \
+     --request POST \
+     --data '{"name": "mario", "job": "plumber"}' \
+     https://reqres.in/api/users/
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/users',
+  type: 'POST',
+  data: {
+    name: 'mario',
+     job: 'plumber',
+  },
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 201" labels={['JSON']}>
+
+```json
+{
+    "name": "mario",
+    "job": "plumber",
+    "id": "42",
+    "createdAt": "2020-10-09T19:49:26.994Z"
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Update an existing user
+
+```
+PUT /api/users/:id
+```
+
+To update the data for an existing user, make a PUT or PATCH request to this endpoint with any data you want. Provide the `id` of the user to be updated.
+
+---
+
+<CodeExample
+  title="PUT /api/users/:id"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl --header "Content-Type: application/json" \
+     --request PUT \
+     --data '{"name": "mario", "job": "hero"}' \
+     https://reqres.in/api/users/42
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/users/42',
+  type: 'PUT',
+  data: {
+    name: 'mario',
+     job: 'hero',
+  },
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 200" labels={['JSON']}>
+
+```json
+{
+    "name": "mario",
+    "job": "hero",
+    "updatedAt": "2020-10-09T20:09:16.370Z"
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Delete existing users
+
+```
+DELETE /api/users/:id
+```
+
+To delete an existing user, make a DELETE request to this endpoint. Provide the `id` of the user to be deleted.
+
+---
+
+<CodeExample
+  title="DELETE /api/users/:id"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl -X DELETE 'https://reqres.in/api/users/42'
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/users/42',
+  type: 'DELETE',
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 204" labels={['JSON']}>
+
+```json
+{}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+## The Color Resource
+
+<TwoColumnSection>
+
+A **Color** resource represents a <a href="https://en.wikipedia.org/wiki/Pantone#Color_of_the_Year">Pantone Color of the Year</a>, with attributes such as `name` and `pantone_value`. This resource is returned when **any** endpoint or data is sent to this API other than the User endpoints. This is useful for testing or demonstrating the front end of your project or a prototype without needing to set up your own API.
+
+<PropertyTable title="Color attributes">
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `id` | number | Unique identifier for the Color of the Year. |
+| `name` | string | Name of the color. |
+| `year` | number | Year the color was Color of the Year. |
+| `color` | string | Hex value of the color. |
+| `pantone_value` | string | Pantone value of the color. |
+
+</PropertyTable>
+
+---
+
+<CodeExample title="BASE URL">
+
+```
+/api/anything/
+```
+
+</CodeExample>
+
+<CodeExample title="THE COLOR OBJECT" labels={['JSON']}>
+
+```
+{
+    "id": 1,
+    "name": "cerulean",
+    "year": 2000,
+    "color": "#98B2D1",
+    "pantone_value": "15-4020"
+},
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Retrieve a specific color
+
+```
+GET /api/anything/:id
+```
+
+To retrieve a specific color, make a GET request to this endpoint (replace 'anything' with any value) and provide the color's `id`.
+
+---
+
+<CodeExample
+  title="GET /api/anything/:id"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl 'https://reqres.in/api/anything/2'
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/anything/2',
+  type: 'GET',
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 200" labels={['JSON']}>
+
+```json
+{
+    "data": {
+        "id": 2,
+        "name": "fuchsia rose",
+        "year": 2001,
+        "color": "#C74375",
+        "pantone_value": "17-2031"
+    },
+    "ad": {
+        "company": "StatusCode Weekly",
+        "url": "http://statuscode.org/",
+        "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+    }
+}
+```
+
+</CodeExample>
+
+<CodeExample title="STATUS: 404" labels={['JSON']}>
+
+```json
+{}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Retrieve a list of colors
+
+```
+GET /api/anything/
+```
+
+To retrieve a list of colors, make a GET request to this endpoint (replace 'anything' with any value). Optionally provide the page number and/or the number of colors per page. The total number of colors available is 12.
+
+<PropertyTable title="Parameters">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `page` | number | optional | `1` | The page number of results to be returned. |
+| `per_page` | number | optional | `6` | The number of colors per page to return. |
+
+</PropertyTable>
+
+---
+
+<CodeExample
+  title="GET /api/anything?page=:page"
+  labels={['cURL', 'jQuery']}
+>
+
+```sh
+curl 'https://reqres.in/api/users?page=1'
+```
+
+```js
+$.ajax({
+  url: 'https://reqres.in/api/anything?page=1',
+  type: 'GET',
+  success: function(response){
+    console.log(response);
+  },
+});
+```
+</CodeExample>
+
+<CodeExample title="STATUS: 200" labels={['JSON']}>
+
+```json
+{
+  "page": 1,
+  "per_page": 6,
+  "total": 12,
+  "total_pages": 2,
+  "data": [
+    {
+      "id": 1,
+      "name": "cerulean",
+      "year": 2000,
+      "color": "#98B2D1",
+      "pantone_value": "15-4020"
+    },
+    {
+      "id": 2,
+      "name": "fuchsia rose",
+      "year": 2001,
+      "color": "#C74375",
+      "pantone_value": "17-2031"
+    },
+    {
+      "id": 3,
+      "name": "true red",
+      "year": 2002,
+      "color": "#BF1932",
+      "pantone_value": "19-1664"
+    },
+    {
+      "id": 4,
+      "name": "aqua sky",
+      "year": 2003,
+      "color": "#7BC4C4",
+      "pantone_value": "14-4811"
+    },
+    {
+      "id": 5,
+      "name": "tigerlily",
+      "year": 2004,
+      "color": "#E2583E",
+      "pantone_value": "17-1456"
+    },
+    {
+      "id": 6,
+      "name": "blue turquoise",
+      "year": 2005,
+      "color": "#53B0AE",
+      "pantone_value": "15-5217"
+    }
+  ],
+  "ad": {
+    "company": "StatusCode Weekly",
+    "url": "http://statuscode.org/",
+    "text": "A weekly newsletter focusing on software development, infrastructure, the server, performance, and the stack end of things."
+  }
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>

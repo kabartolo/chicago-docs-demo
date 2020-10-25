@@ -1,0 +1,52 @@
+---
+title: Title
+name: Title
+description: A short description using the key words in this document.
+date: 2019-07-10
+---
+
+The first paragraph of an API doc should descrbie the API on the whole, using direct language. This part of the document is not included in
+the site-search index (however, the value of the `description` frontmatter tag is indexed along with the document title). 
+
+Note: This example is available in `mdx` format in `/markdown-templates`.
+
+<Section>
+
+## Title for topic area
+
+This is the first paragraph of a Section component. The first paragraph of an API method doc should describe the method (what is it used for?). Note that this first paragraph under a heading is included in the site-search index. If there is no paragraph (`<p>` tag) here, only the heading will be indexed. To index any keywords or search terms for this section, use them in this paragraph. Try searching "The Section component is the bee's knees" and you should see a result for this section.
+
+The `h2` (`##`) tag at the top of a Section shortcode provides the title for the section and is added to the table of contents for the current document.
+
+The Section component creates a `<section>` HTML tag, inside of which are two `divs`. On wide screens, these divs are presented as side-by-side columns;
+the right-hand column will be sticky. On other screens, they appear one after the other. Use `---` in the `mdx` file to separate the content for these columns. See the code blocks
+on the right (or below, if you're on a small screen) for a demonstration.
+
+The best use for this component is to organize your API methods. Describe the method in the first `div`, and provide request and response examples (or other code) in code blocks on the right. When a user scrolls while reading the description (on a wide screen), the code examples remain fixed on the right.
+
+---
+
+<CodeExample
+  labels={['Python', 'JavaScript', 'cURL']}
+  includeCopyButton={true}
+  theme='dark'
+>
+
+```python
+s = "Python syntax highlighting"
+print s
+```
+
+```js {1-4}
+(function someDemo() {
+  var test = "Hello World!";
+  console.log(test);
+})();
+```
+
+```sh
+cURL example
+```
+</CodeExample>
+
+</Section>

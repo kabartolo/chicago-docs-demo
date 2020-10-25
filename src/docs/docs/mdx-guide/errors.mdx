@@ -1,0 +1,105 @@
+---
+title: Syntax Errors in MDX
+shortTitle: Syntax Errors
+description: 'An overview of syntax errors in MDX files'
+---
+
+## Overview
+
+You might run into the following error while writing MDX files:
+
+```
+Error: EnsureResources was not able to find resources for path: {path}
+```
+
+This is most likely due to a syntax error in an MDX file. Unfortunately, with Gatsby, these syntax errors are not always reported in the console.
+
+Both JSX and HTML syntax errors will prevent the post from being published. Be sure to write your MDX files while the Gatsby development server is running, and save often. You might have to clear the site cache and restart the development server (see below) to get specific feedback in the console:
+
+```curl
+gatsby clean
+gatsby develop
+```
+
+This page describes the common syntax errors in MDX files.
+
+## Missing Curly Braces
+
+Non-string JSX attributes need to be wrapped in curly braces ({}): `<Component prop={[1, 2, 3]} />`.
+
+In the following example, the curly braces are missing from the `p` prop value. Add them in to see the box render correctly.
+
+```js live
+
+<Box
+  p=4
+  color="primary"
+  bg="white"
+>
+  Check out the syntax error below
+</Box>
+
+```
+
+It should look like this:
+
+
+```js {2}
+
+<Box
+  p={4}
+  color="primary"
+  bg="white"
+>
+  That's better
+</Box>
+
+```
+
+## Quotation Marks
+
+In Markdown, quotation marks ('' or "") are printed literally, and it doesn't matter if they're mismatched or incorrectly nested. 
+
+However, there are specific rules for quotation marks when used in JSX and HTML. Quotation marks need to be used in pairs of opening and closing marks. This example fails because the quotation is not closed:
+
+```js live
+
+<a href="www.google.com>Google</a>
+```
+
+This should be written as
+
+`<a href="www.google.com">Google</a>`. 
+
+Quotation marks should also be correcly nested; this means single quotation marks (') should be used inside double ("), or vice versa. The following will cause an error:
+
+```js live
+<Textarea
+  defaultValue="Say, 'Hello, World!""
+  rows={8}
+/>
+
+```
+
+This should be written as
+
+`<Textarea
+  defaultValue="Say, 'Hello, World!'"
+  rows={8}
+/>`
+
+## Unclosed Tags
+
+Both HTML and React tags must be closed. This means adding a closing tag (e.g., `</a>`) after the content or using the self-closing version of a tag. For example, you should write the self-closing `<br />` instead of `<br>`.
+
+Be careful when using Chicago Docs components such as `<Alert>` that expect text between the opening and closing tags. You should include the closing tag (`</Alert>`) after the text:
+
+```
+<Alert>
+
+Text that will appear in the browser.
+
+</Alert>
+```
+
+It's a good idea to write the opening and closing tags at the same time, then add the text between them afterwards. It can be frustrating to get a syntax error when the culprit is one of a hundred JSX and HTML tags.

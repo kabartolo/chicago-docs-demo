@@ -1,0 +1,554 @@
+---
+title: Guide to Writing MDX and Markdown
+shortTitle: Writing MDX
+description: 'Guide to the syntax of MDX and Markdown'
+---
+
+<TwoColumnSection>
+
+## Overview
+
+The <a href="https://mdxjs.com/">official MDX site</a> describes MDX as 'an authorable format that lets you seamlessly write JSX in your Markdown documents.'' This means you can import and embed React components right into your Markdown posts using JSX tags.
+
+If you prefer not to use MDX, you can also just write regular Markdown. Elements such as code blocks and tables are automatically styled by the theme (and these styles are <a href="/docs/styling-and-shadowing/#theme-ui">easily customized</a>), so you can focus on writing great content.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## JSX Syntax
+
+One of the most powerful features of MDX is that it allows <a href="https://reactjs.org">React</a> components to be rendered alongside Markdown. React is written in JSX, which is a syntax extension to JavaScript. React components are added to MDX using JSX tags.
+
+These JSX tags look like HTML tags, but they have slightly different syntax and terminology. JSX attributes are passed to the React component as *props*. In an MDX file, a block of Markdown text  between JSX tags is a *child*, which also gets passed to the React component in a prop called `children`. 
+
+In the following example, the text 'Allo' is a child of the Box component, and `p`, `color`, and `bg` are props:
+
+```js live
+
+<Box
+  p={3}
+  color="primary"
+  bg="white"
+>
+
+Allo
+
+</Box>
+
+```
+
+If a prop value is a string, it should be wrapped in quotation marks (`""`). If the prop value is a variable or a type other than a string, wrap it in curly braces (`{}`). To ensure proper rendering, add a blank line above and below the Markdown text, and don't indent it.
+
+<Alert variant="warning">
+
+Don't forget those curly braces or you'll get a syntax error. See <a href="/docs/mdx-guide/errors/">Syntax Errors in MDX</a> for more information.
+
+</Alert>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Frontmatter
+
+A doc's frontmatter contains data about it, such as the `title` and `description`. Frontmatter is placed at the top of the MDX file between sets of three hyphens (---). Each frontmatter field should be placed on its own line. 
+
+See <a href="/docs/configuration/site-options/#frontmatter">Configuration: Frontmatter</a> for the available frontmatter fields in Chicago Docs.
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+---
+title: The full title of your site
+shortTitle: A shorter title
+description: Use some key words here to help users find this post
+---
+
+## Secondary header
+
+Write regular MDX here.
+
+```
+
+</CodeExample>
+
+To learn more about how frontmatter fields are used in Gatsby themes, see <a href="https://www.gatsbyjs.com/docs/mdx/writing-pages/#using-frontmatter-in-mdx">Using Frontmatter in MDX</a>.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Markdown Syntax
+
+MDX is a combination of Markdown and JSX, and regular Markdown syntax can be used for most formatting. What follows is a guide to the Markdown syntax supported by Gatsby. Each section gives the Markdown syntax, the HTML element it creates, and a demonstration of the element.
+
+Note that the HTML equivalents can also be used instead of Markdown syntax. For example, you can write `<h1>This is a heading</h1>` instead of `# This is a heading` if you prefer.
+
+### Headings
+
+Headings are usually created in Markdown with a set of hash (\#) characters placed before the text for the heading, with a space in between (this space is **required** in Gatsby). The number of hashes corresponds to the level of the heading (i.e., \# corresponds to a first-level heading, or the `<h1>` HTML tag).
+
+| Markdown | HTML | Output |
+| -------- | ---- | ------ |
+| `# Heading 1` | `<h1>Heading 1</h1>` | <h1>Heading 1</h1> |
+| `# Heading 2` | `<h2>Heading 2</h2>` | <h2>Heading 2</h2> |
+| `# Heading 3` | `<h3>Heading 3</h3>` | <h3>Heading 3</h3> |
+| `# Heading 4` | `<h4>Heading 4</h4>` | <h4>Heading 4</h4> |
+| `# Heading 5` | `<h5>Heading 5</h5>` | <h5>Heading 5</h5> |
+| `# Heading 6` | `<h6>Heading 6</h6>` | <h6>Heading 6</h6> |
+
+There is alternative syntax for `<h1>` and `<h2>` headings:
+
+| Markdown | HTML | Output |
+| -------- | ---- | ------ |
+| `Heading 1` <br /> `===============` | `<h1>Heading 1</h1>` | <h1>Heading 1</h1> |
+| `Heading 2` <br /> `---------------` | `<h2>Heading 2</h2>` | <h2>Heading 2</h2> |
+
+### Emphasis
+
+#### Italics
+
+To mark text in *italics*, add an asterisk (\*) or underscore (\_) before and after the text to be formatted.
+
+| Markdown | Alternative | HTML | Output |
+| -------- | ----------- | ---- | ------ |
+| `*italics*` | `_italics_` | `<em>italics</em>` | *italics* |
+
+#### Bold
+
+To mark text in **boldface**, add two asterisks (\*\*) or two underscores (\_\_) before and after the text to be formatted.
+
+| Markdown | Alternative | HTML | Output |
+| -------- | ----------- | ---- | ------ |
+| `**boldface**` | `__boldface__` | `<strong>boldface</strong>` | **boldface** |
+
+#### Bold and italics together
+
+To emphasize text with ***both boldface and italics***, use three asterisks (\*\*\*) or three underscores (\_\_\_) before and after the text to be formatted.
+
+| Markdown | Alternative | HTML | Output |
+| -------- | ----------- | ---- | ------ |
+| `***boldface and italics***` | `___boldface and italics___` | `<strong><em>boldface</em></strong>` | ***boldface and italics*** |
+
+<Alert>
+
+To emphasize text with bold or italics in the *middle* of a word, use asterisks but not underscores. For example, 
+
+`middle*of*word` becomes middle*of*word, but
+
+`middle_of_word` becomes middle_of_word.
+
+The underscores only work when there is spacing before and after the emphasized word.
+
+</Alert>
+
+### Line breaks
+
+To create a line break, follow a line with two spaces and then hit enter. An alternative that is easier to see is the `<br />` tag; add this tag between the two lines of text to be separated with a line break.
+
+
+<CodeExample title="Line breaks: One line" labels={['Markdown']}>
+
+```
+This is the first line. <br /> This is the second line.
+```
+
+</CodeExample>
+
+<CodeExample title="Line breaks: Separate lines" labels={['Markdown']}>
+
+```
+This is the first line.<br />
+This is the second line.
+```
+
+</CodeExample>
+
+Both of these render as
+
+This is the first line. <br /> This is the second line.
+
+<Alert variant="warning">
+
+Be sure to use the self-closing syntax for the `<br />` tag. Don't just write `<br>` or you'll get an error (the parser will complain that the `<br>` tag has been left unclosed) and the post will not be published.
+
+</Alert>
+
+### Block quotes
+
+A block quote is a piece of text that is indented from the rest of the text. Block quotes are created by placing a greater-than sign (>) before each line in the quote.
+
+<CodeExample title="Block quotes" labels={['Markdown']}>
+
+```
+> So we beat on, boats against the current, borne back ceaselessly into the past.
+```
+
+</CodeExample>
+
+This renders as
+
+> So we beat on, boats against the current, borne back ceaselessly into the past.
+
+A block quote can contain other Markdown formatting as well as blank lines and nested block quotes. Nested block quotes are created using additional greater-than signs (>>).
+
+
+<CodeExample title="Block quotes: Nested" labels={['Markdown']}>
+
+```
+> *Dear Mr. Carraway.*
+>
+> *This has been one of the most terrible shocks of my life to me I hardly can believe it that it is true at all. Such a mad act as that man did should make us all think. I cannot come down now as I am tied up in some very important business and cannot get mixed up in this thing now. If there is anything I can do a little later let me know in a letter by Edgar. I hardly know where I am when I hear about a thing like this and am completely knocked down and out.*
+>
+>> *Yours truly*
+>>> **MEYER WOLFSHIEM**
+>
+> and then hasty addenda beneath:
+>> *Let me know about the funeral etc do not know his family at all.*
+```
+
+</CodeExample>
+
+This renders as
+
+> *Dear Mr. Carraway.*
+>
+> *This has been one of the most terrible shocks of my life to me I hardly can believe it that it is true at all. Such a mad act as that man did should make us all think. I cannot come down now as I am tied up in some very important business and cannot get mixed up in this thing now. If there is anything I can do a little later let me know in a letter by Edgar. I hardly know where I am when I hear about a thing like this and am completely knocked down and out.*
+>
+>> *Yours truly*
+>>> **MEYER WOLFSHIEM**
+>
+> and then hasty addenda beneath:
+>> *Let me know about the funeral etc do not know his family at all.*
+
+### Lists
+
+There are several ways to organize related items into ordered and unordered lists in Markdown.
+
+#### Unordered lists
+
+To create an unordered list, place an asterisk (*), minus sign (-), or plus sign (+) followed by a space before each item:
+
+
+<CodeExample title="Unordered lists" labels={['Markdown']}>
+
+```
+* Oranges
+* Apples
+
++ Oranges
++ Apples
+
+- Oranges
+- Apples
+```
+
+</CodeExample>
+
+This creates an unordered list in HTML:
+
+<CodeExample title="Unordered lists: HTML" labels={['Markdown']}>
+
+```
+<ul>
+    <li>Oranges</li>
+    <li>Apples</li>
+</ul>
+```
+
+</CodeExample>
+
+This renders as
+
+* Oranges
+* Apples
+
+#### Ordered lists
+
+To create an ordered list, place a numeral followed by a period (.) and a space before each item in the list:
+
+<CodeExample title="Ordered lists" labels={['Markdown']}>
+
+```
+1. Oranges
+2. Apples
+```
+
+</CodeExample>
+
+This creates an ordered list in HTML:
+
+<CodeExample title="Ordered lists: HTML" labels={['Markdown']}>
+
+```
+<ol>
+    <li>Oranges</li>
+    <li>Apples</li>
+</ol>
+```
+
+</CodeExample>
+
+This renders as
+
+1. Oranges
+2. Apples
+
+A fun fact here is that only the starting number matters. The numbers after it can be any number and will still render in numerical order from the first number.
+
+<CodeExample title="Ordered lists: Numbering" labels={['Markdown']}>
+
+```
+2. Oranges
+4. Apples
+55. Berries
+0. Bananas
+```
+
+</CodeExample>
+
+This renders as
+
+2. Oranges
+4. Apples
+55. Berries
+0. Bananas
+
+#### Nested lists
+
+To create a nested list, indent the nested items.
+
+<CodeExample title="Nested lists" labels={['Markdown']}>
+
+```
+* Apples
+* Oranges
+* Berries
+    * Strawberries
+    * Raspberries
+```
+
+</CodeExample>
+
+This renders as
+
+* Apples
+* Oranges
+* Berries
+    * Strawberries
+    * Raspberries
+
+### Tables
+
+Table columns are created by surrounding text in pipe (|) characters. To create a table header, place sets of three or more hyphens (---) between pipe characters in the second row (the first row then becomes the header). You can use most Markdown syntax inside the table.
+
+Note that the cell widths don't need to be even in Markdown. They will render evenly in the browser.
+
+<CodeExample title="Tables" labels={['Markdown']}>
+
+```
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `name` | string | Name of the resource |
+| `path` | string | Path to the resource |
+```
+
+</CodeExample>
+
+This renders as 
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `name` | string | Name of the resource |
+| `path` | string | Path to the resource |
+
+You can align items inside table cells (cells are left aligned by default) by combining colons (:) with the hyphens (-) in the second row:
+
+<CodeExample title="Table alignment" labels={['Markdown']}>
+
+```
+| Left | Center | Right |
+| :--- | :----: | ----: |
+| Left-aligned text | Center-aligned text | Right-aligned text |
+```
+
+</CodeExample>
+
+This renders as
+
+| Left | Center | Right |
+| :--- | :----: | ----: |
+| Left-aligned text | Center-aligned text | Right-aligned text |
+
+For a table component designed for API docs, see the <a href="/docs/components-and-hooks/#propertytable">PropertyTable</a> React component from Chicago Docs.
+
+### Images
+
+To add an image, first add an exclamation mark (!) followed by the alt text for the image in square brackets (e.g., `![Image alt text]`) and the filename of the image in parentheses [e.g., `(filename.jpg)`].
+
+<CodeExample title="Images" labels={['Markdown']}>
+
+```
+![The cat trap in action](sahand-babali-unsplash.jpg)
+```
+
+</CodeExample>
+
+The equivalent HTML element is the following:
+
+<CodeExample title="Images: HTML" labels={['Markdown']}>
+
+```
+<img alt="The cat trap in action" src="../src/assets/sahand-babali-unsplash.jpg" />
+```
+
+</CodeExample>
+
+This renders a cute cat pic:
+
+![The cat trap in action](../../assets/sahand-babali-unsplash.jpg)
+
+<span>Photo by <a href="https://unsplash.com/@sahandbabali?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Sahand Babali</a> on <a href="https://unsplash.com/s/photos/cat-in-a-box?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+
+For a fluid image (one that adjusts its size in response to the screen size), use the <a href="/docs/components-and-hooks/#image">Image component</a>. This component uses <a href="https://www.gatsbyjs.com/plugins/gatsby-image/">`gatsby-image`</a> to optimize and lazy load your images.
+
+<Alert>
+
+Markdown syntax requires the path of the image file to be relative to the current file, while the Image component requires only the image's filename (as long as the image lives in `src/assets`, or the `assetsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>).
+
+</Alert>
+
+### Links
+
+To create an external link in Markdown, write the link text in square brackets (e.g., `[eBay]`) followed by the URL in parentheses [e.g., `(https://ebay.com)`]. 
+
+| Markdown | HTML | Output |
+| -------- | ---- | ------ |
+| `[eBay](https://ebay.com)` | `<a href="https://ebay.com">eBay</a>` | <a href="https://ebay.com">eBay</a> |
+
+A URL on its own is automatically converted into an HTML link. For example, `https://github.com` renders as https://github.com.
+
+See <a href="/docs/components-and-hooks/#external-and-internal-links">Components and Hooks: External and Internal Links</a> to see how Chicago Docs creates internal and external links from your Markdown links.
+
+### Code
+
+#### Inline code
+
+Inline code refers to text in the middle of a sentence that is formatted in a different font (such as Monospace). It is used for things like variable and function names. It can also be used to print text literally without having to escape special characters.
+
+To mark text as inline code, enclose it in backticks (\`).
+
+| Markdown | HTML | Output |
+| -------- | ---- | ------ |
+| ``The `sum` function`` | `The <code>sum</code> function` | The `sum` function |
+
+#### Code blocks
+
+Create a code block by adding three or more backticks (\`) on the lines above and below the block. This is referred to as a *fenced* code block.
+
+<CodeExample title="Fenced code blocks: Backticks" labels={['Markdown']}>
+
+````
+```
+plugins: [
+  'gatsby-plugin-mdx',
+]
+```
+````
+
+</CodeExample>
+
+Alternatively, indent the block by four spaces:
+
+<CodeExample title="Fenced code blocks: Indented" labels={['Markdown']}>
+
+```
+    plugins: [
+      'gatsby-plugin-mdx',
+    ]
+```
+
+</CodeExample>
+
+This creates something like the following HTML:
+
+<CodeExample title="Fenced code blocks: HTML" labels={['Markdown']}>
+
+```
+<pre>
+  <code>plugins: [ 'gatsby-plugin-mdx', ]</code>
+</pre>
+```
+
+</CodeExample>
+
+This renders as
+
+```
+plugins: [
+  'gatsby-plugin-mdx',
+]
+```
+
+To add line hightlighting, line numbers, and live preview, see <a href="/docs/components-and-hooks/#code">Components and Hooks: Code</a>.
+
+<TwoColumnSection>
+
+### Escaping characters
+
+Certain characters, such as the hash symbol (\#) and the plus sign (\+), can be interpreted by Markdown as part of its syntax. To print one of these characters literally on screen, you can escape it using a backslash (\\). For example, `\\` prints the \\ character itself.
+
+Alternatively, treat the symbol as <a href="#code">inline code or a code block</a> by enclosing it in backticks (\`). Note, however, that this will change its font and/or background color.
+
+The following characters can be escaped using a backslash (\\) to ensure they are rendered literally on screen:
+
+| Symbol | Name |
+| :----: | ---- |
+| \*     | asterisk |
+| \\     | backslash |
+| \`     | backtick |
+| \[\]   | brackets |
+| \{\}   | curly braces |
+| \(\)   | parentheses |
+| \.     | period or dot |
+| \#     | hash or pound sign |
+| \+     | plus sign |
+| \-     | minus sign or hyphen |
+| \_     | underscore |
+| \!     | exclamation mark |
+| \|     | pipe | 
+
+To escape a fenced code block, increase the number of backticks in the outer code block:
+
+<CodeExample title="Fenced code blocks: Escaped" labels={['Markdown']}>
+
+`````
+````
+
+outer code block
+
+```
+inner code block
+```
+
+````
+`````
+
+</CodeExample>
+
+This renders as 
+
+````
+
+outer code block
+
+```
+inner code block
+```
+
+````
+
+</TwoColumnSection>
+
+</TwoColumnSection>

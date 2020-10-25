@@ -1,0 +1,731 @@
+---
+title: Components and Hooks
+description: 'List of React components available to MDX files and hooks available to custom components'
+---
+
+<TwoColumnSection>
+
+## Overview
+
+This section lists the React components that are available to the MDX files in the `src/docs` directory (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) of your Chicago Docs site. It also lists the available hooks that can be used in custom components to fetch data about your docs.
+
+<Alert>
+
+All components described on this page are available automatically to all MDX files. There is no need to import them into your MDX files before using them.
+
+</Alert>
+
+</TwoColumnSection>
+
+## Chicago Docs Components
+
+Chicago Docs comes with several components that help make it quick and easy for your users to find information on your product or API. Features such as site search and sidebar navigation mean your users won't get frustrated trying to find what they need.
+
+<TwoColumnSection>
+
+### Terminology
+
+In this section, a *child* is a block of Markdown text between JSX tags (shortcodes); these blocks of text are passed to the React component as a prop called `children`. There should be a blank line above and below each Markdown child.
+
+A *prop* is a value passed to the React component directly.
+
+In the following example, the text `"Attention!"` is a child of the Alert component, and `variant` is a prop (the string `"warning"` will be passed to the component to determine the background color of the Alert box).
+
+See also <a href="/docs/mdx-guide/mdx-guide/#jsx-syntax">Guide to MDX: JSX Syntax</a>.
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+---
+title: Title of example MDX file
+---
+
+## Example Subheader
+
+<Alert variant="warning">
+
+Please pay attention to me!
+
+</Alert>
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Alert
+
+The Alert component creates a colored text box with a message. Try it out in the live example below.
+
+```js live
+<Alert variant="warning">
+
+Consider this a warning!
+
+</Alert>
+
+```
+
+<PropertyTable title="Alert props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `variant` | string | optional | `"information"` | Style variant, one of `"information"` (blue), `"success"` (green), `"warning"` (orange), and `"error"` (red). |
+| `children` | React node or array of nodes | required | | MDX text placed between Alert tags. This text is rendered inside the Alert box. |
+
+</PropertyTable>
+
+<Alert>
+
+The <a href="/docs/styling-and-shadowing/#theme-ui">Theme-UI style variants</a> for this component are listed in the `alerts` object. 
+
+</Alert>
+
+The following variants are available:
+
+<Alert variant="information">
+
+variant: "information"
+
+</Alert>
+
+<Alert variant="success">
+
+variant: "success"
+
+</Alert>
+
+<Alert variant="warning">
+
+variant: "warning"
+
+</Alert>
+
+<Alert variant="error">
+
+variant: "error"
+
+</Alert>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### CodeExample
+
+The CodeExample component is used to display one or more code examples in a container. It was designed with API docs in mind. Create language-specific examples for calling an API method, and display them all in one place! Only one code example is displayed at a time; the user chooses an example from a select box at the top of the CodeExample component.
+
+A copy button is also included.
+
+This meta-example demonstrates the CodeExample component *using* the CodeExample component:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````js
+<CodeExample title="GET" labels={['JavaScript', 'curl']}>
+
+```js
+const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
+const hipsterIpsum = response.json();
+```
+
+```sh
+curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
+```
+
+</CodeExample>
+````
+
+</CodeExample>
+
+This results in the following component:
+
+<CodeExample title="GET" labels={['JavaScript', 'curl']}>
+
+```js
+const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
+const hipsterIpsum = response.json();
+```
+
+```sh
+curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
+```
+
+</CodeExample>
+
+<PropertyTable title="CodeExample props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `title` | string | optional | `''` (empty string) | Title appearing in the top bar of the CodeExample container. |
+| `labels` | array of strings | optional | `[]` | Array of strings describing the language or other aspect of each code block (the number of labels should equal the number of code blocks and be in the same order). If more than one label is present, the labels are displayed in a select box allowing users to switch between examples. A single label will be displayed as text. |
+| `children` | React node or array of nodes | required | | MDX code blocks placed between CodeExample tags. |
+
+</PropertyTable>
+
+<Alert variant="warning">
+
+This component is meant to be used in MDX files only, as it expects code blocks produced by `gatsby-plugin-mdx`.
+
+</Alert>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### ExternalLink
+
+This component creates an external link that opens in a new tab, which is indicated by an external-window icon. This component is used automatically in docs for any <a href="/docs/mdx-guide/mdx-guide/#links">Markdown or HTML links</a> with an `href` attribute starting with `'http'`. For example, `<a href="https://en.wikipedia.org">Wikipedia</a>` becomes <a href="https://en.wikipedia.org">Wikipedia</a>. You can also use the component directly if you prefer:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+<ExternalLink href="https://en.wikipedia.org/wiki/Cats_and_the_Internet">Cats and the Internet</ExternalLink>
+```
+
+This produces the following link: 
+<ExternalLink href="https://en.wikipedia.org/wiki/Cats_and_the_Internet">Cats and the Internet</ExternalLink>
+
+</CodeExample>
+
+<PropertyTable title="ExternalLink props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `href` | string | required | | External URL that will open in a new tab when the component is clicked.|
+| `children` | React node | required | | MDX text placed between ExternalLink tags, used to display the link.|
+
+</PropertyTable>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Image
+
+The Image component from Chicago Docs uses `gatsby-image` to optimize and lazy load an image. This component renders a fluid image that adjusts to the size of your screen. You can also use the `Img` component from `gatsby-image` directly. See <a href="https://www.gatsbyjs.com/plugins/gatsby-image/">`gatsby-image`</a> for guidance.
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+<Image src="aleksey-milov-unsplash.jpg" alt="Cat loaf" />
+```
+
+</CodeExample>
+
+This will render a fluid image (try changing the size of your screen):
+
+<Image src="aleksey-milov-unsplash.jpg" alt="Cat loaf" />
+
+<span>Photo by <a href="https://unsplash.com/@phamap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Aleksey Milov</a> on <a href="https://unsplash.com/s/photos/cat-angry?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
+
+<PropertyTable title="Image props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `src` | string | required | | Filename of the image asset (must live in your site's designated <a href="/docs/configuration/site-options/#theme-options">assets folder</a>, such as `src/assets`). Do not include the path. |
+| `alt` | string | optional | `''` (empty string) | Text that describes the image. |
+| `title` | string | optional | value of `alt` prop | Text that appears in a tooltip when the image is moused over. |
+
+</PropertyTable>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### PostList
+
+This component is intended to be used in the `index.mdx` file of a directory. It prints a list of posts in that directory. For example, placing this at `your-site.com/tutorials/configuration/` will return a list of all posts with the base path of `/tutorials/configuration/`, such as `/tutorials/configuration/how-to-configure-gatsby.mdx`.
+
+The following example demonstrates use of the PostList component:
+
+<CodeExample title="src/docs/tutorials/index.mdx" labels={['MDX']}>
+
+```js
+---
+title: Table of contents
+description: Demonstration of the PostList component
+showTOC: false
+---
+
+This component will print a list of docs in the `tutorials` directory of the `docsPath` directory, such as `src/docs/tutorials/how-to-install-ubuntu.mdx`.
+
+## Table of contents:
+
+<PostList />
+
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### PropertyTable
+
+This table component provides a neat way of listing the properties or attributes of a React component or other entity. It wraps a regular Markdown table that has specific header values (`Name`, `Type`, `Info`, `Default`, and `Description`). In fact, it's used to create its own props table here:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+<PropertyTable title="PropertyTable props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `title` | string | optional | `''` (empty string) | Title that appears in the header of the table. |
+| `children` | React node or array of nodes | required | | Markdown table placed between PropertyTable tags. Table headers should be `Name`, `Type`, `Info`, `Default`, and/or `Description` (order not important). Other table headers will be ignored. |
+
+</PropertyTable>
+```
+
+</CodeExample>
+
+<PropertyTable title="PropertyTable props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `title` | string | optional | `''` (empty string) | Title that appears in the header of the table. |
+| `children` | React node or array of nodes | required | | Markdown table placed between PropertyTable tags. Table headers should be `Name`, `Type`, `Info`, `Default`, and/or `Description` (order not important). Other table headers will be ignored. |
+
+</PropertyTable>
+
+*Note.* If a value for the `Default` column is included, it will appear following the string `'default:'`. You can get around this by omitting a default value and adding it elsewhere:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+<PropertyTable title="Resource properties">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `type` | string | optional (default: `'array'`) | | Type of the resource, one of `'array'` or `'object'`. |
+| `owner` | string | required | | Owner of the resource. |
+
+</PropertyTable>
+```
+
+</CodeExample>
+
+This results in the following table:
+
+<PropertyTable title="Resource properties">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `type` | string | optional (default: `'array'`) | | Type of the resource, one of `'array'` or `'object'`. |
+| `owner` | string | required | | Owner of the resource. |
+
+</PropertyTable>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### TOC
+
+The TOC component is added automatically to MDX files in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) when the <a href="/docs/configuration/site-options/#theme-options">`alwaysShowTOC`</a> theme option is set to `true`. This can be overriden by the `showTOC` <a href="/docs/configuration/site-options/#frontmatter">frontmatter field</a> for an individual post.
+
+You can also insert a TOC component in any MDX file. It will produce a TOC for the current file.
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+```js
+<TOC depth={2} />
+```
+
+</CodeExample>
+
+This results in the following component (a table of contents for the current doc):
+
+<TOC depth={2} />
+
+<PropertyTable title="TOC props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `depth` | number | optional | `6` | Depth of nested items to print (between `2` and `6`). |
+| `contents` | object | optional | `null` | Custom table of contents with the following shape: `{ items: { title: '', url: '' } }`. Used by other components. |
+| `title` | string | optional | `''` (empty string) | Title displayed above list of contents. |
+| `className` | string | optional | `''` (empty string) | Class name added to the outer `div` tag, which also has a class name of `'toc-container'`. |
+
+</PropertyTable>
+
+<Alert>
+
+The Sidebar and TOC components both track the active header in the viewport as the user scrolls, and they highlight the corresponding header in their respective list of posts. This highlighting can seem to jump around if you have nested headers in your post. To prevent this, surround the nested sections with an HTML element, such as a `<section>` or the <a href="#twocolumnsection">TwoColumnSection</a> component. Each section should include the nested header and its paragraphs:
+
+```js
+
+## Outer header
+
+<section>
+
+### Nested header
+
+First paragraph.
+
+Second paragraph.
+
+</section>
+
+<section>
+
+### Another nested header
+
+Another paragraph.
+
+</section>
+
+```
+
+</Alert>
+
+</TwoColumnSection>
+
+### TwoColumnSection
+
+<TwoColumnSection>
+
+The TwoColumnSection component creates a `<section>` HTML tag and is styled in a two-column layout where the left column scrolls and the right column is sticky on wide screens. On smaller screens, the second column appears below the first column and is not sticky. The best use for this component is to organize API methods. Describe the method in the left column, and provide request and response examples (or other content) that remain stickied on the right.
+
+<PropertyTable title="TwoColumnSection props">
+
+| Name | Type | Info | Default | Description |
+| ---- | ---- | ---- | ------- | ----------- |
+| `children` | React node or array of nodes | required | | MDX text placed between TwoColumnSection tags. Each child can be any valid MDX text, but it works best with code blocks and CodeExample components. |
+
+</PropertyTable>
+
+Use a thematic break (`<hr />` or `---`) somewhere between the TwoColumnSection tags to separate the content for the two columns (i.e., content before and after this tag will be placed in the left and right columns, respectively).
+
+This hipster-centric example helps demonstrate this component:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````js
+---
+title: TwoColumnSection component demonstration
+---
+
+<TwoColumnSection>
+
+Meh hammock shaman XOXO thundercats disrupt pork belly marfa shoreditch. Dreamcatcher single-origin coffee whatever taiyaki pinterest enamel pin. Man braid adaptogen flannel pickled, retro vice paleo letterpress brunch disrupt put a bird on it fam. Activated charcoal pour-over street art, taiyaki hell of four loko chia gluten-free distillery. Hammock thundercats kombucha pop-up af vexillologist 90's shoreditch woke chillwave. Bushwick single-origin coffee semiotics lo-fi lyft sriracha hammock kinfolk asymmetrical tattooed. Deep v meditation normcore, gentrify echo park copper mug distillery vice messenger bag tattooed direct trade.
+
+Bicycle rights blog deep v celiac williamsburg wolf godard meggings. Bitters schlitz yuccie offal. Yuccie cray art party YOLO, tousled fashion axe semiotics artisan affogato fanny pack 8-bit deep v taiyaki asymmetrical paleo. YOLO pinterest fanny pack paleo, DIY viral taxidermy. Palo santo kale chips polaroid 8-bit. Letterpress actually mumblecore blog. Iceland waistcoat lomo kinfolk meditation bicycle rights selvage chia pop-up kale chips small batch.
+
+---
+
+<CodeExample title="GET" labels={['JavaScript', 'curl']}>
+
+```js
+const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
+const hipsterIpsum = response.json();
+```
+
+```sh
+curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
+```
+
+</CodeExample>
+
+<CodeExample title="RESPONSE">
+
+```sh
+[ "Taxidermy poutine post-ironic hexagon pug food truck banh mi subway tile paleo bespoke. Trust fund tilde sustainable fingerstache biodiesel adaptogen. Twee XOXO hoodie knausgaard snackwave butcher, cardigan etsy trust fund mumblecore kogi try-hard." ]
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+````
+
+</CodeExample>
+
+This results in the following two-column section:
+
+<TwoColumnSection>
+
+Meh hammock shaman XOXO thundercats disrupt pork belly marfa shoreditch. Dreamcatcher single-origin coffee whatever taiyaki pinterest enamel pin. Man braid adaptogen flannel pickled, retro vice paleo letterpress brunch disrupt put a bird on it fam. Activated charcoal pour-over street art, taiyaki hell of four loko chia gluten-free distillery. Hammock thundercats kombucha pop-up af vexillologist 90's shoreditch woke chillwave. Bushwick single-origin coffee semiotics lo-fi lyft sriracha hammock kinfolk asymmetrical tattooed. Deep v meditation normcore, gentrify echo park copper mug distillery vice messenger bag tattooed direct trade.
+
+Bicycle rights blog deep v celiac williamsburg wolf godard meggings. Bitters schlitz yuccie offal. Yuccie cray art party YOLO, tousled fashion axe semiotics artisan affogato fanny pack 8-bit deep v taiyaki asymmetrical paleo. YOLO pinterest fanny pack paleo, DIY viral taxidermy. Palo santo kale chips polaroid 8-bit. Letterpress actually mumblecore blog. Iceland waistcoat lomo kinfolk meditation bicycle rights selvage chia pop-up kale chips small batch.
+
+<hr />
+
+<CodeExample title="GET" labels={[ 'JavaScript', 'curl' ]}>
+
+```js
+const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
+const hipsterIpsum = response.json();
+```
+
+```sh
+curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
+```
+
+</CodeExample>
+
+<CodeExample title="RESPONSE">
+
+```sh
+[ "Taxidermy poutine post-ironic hexagon pug food truck banh mi subway tile paleo bespoke. Trust fund tilde sustainable fingerstache biodiesel adaptogen. Twee XOXO hoodie knausgaard snackwave butcher, cardigan etsy trust fund mumblecore kogi try-hard." ]
+```
+
+</CodeExample>
+
+</TwoColumnSection>
+
+<Alert variant="warning">
+
+The heights of the elements in the right column are adjusted to fit within the viewport. This looks best with code blocks; other elements might not display properly.
+
+</Alert>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Theme-UI Components
+
+All Theme-UI components, such as Avatar and Message, are available to this theme. See the <a href="https://theme-ui.com/components">Theme UI Docs</a> for a list of components.
+
+Note that the Theme-UI Alert component is overriden by the <a href="#alert">Alert component</a> from Chicago Docs.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Internal and External Links
+
+There are three link types with different behaviors on a Chicago Docs site:
+
+| Type | Behavior | Path | Component | Example |
+| ---- | -------- | ---- | --------- | ------- |
+| <a href="https://www.gatsbyjs.com/docs/linking-between-pages/#using-a-for-external-links">External link</a> | Opens in a new tab and includes a new-window icon | Starts with `'http'` | <a href="#externallink">ExternalLink</a> | [GitHub](https://www.github.com) |
+| Internal link | Navigates to other pages on the same site without a page refresh | Relative path (e.g., `/docs/quick-start/`) | <a href="https://www.gatsbyjs.com/docs/gatsby-link/">Gatsby Link</a> | [Quick Start](/docs/quick-start/) |
+| Fragment link | Jumps to a different location on the same page without a page refresh | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Theme-UI Components](#theme-ui-components) | 
+
+Create a link using either Markdown or HTML:
+
+```
+[Github](https://www.github.com)
+
+<a href="https://www.github.com" target="_blank" rel="noopener noreferrer">Github</a>
+```
+
+You can also use the Gatsby Link and ExternalLink components directly if you prefer.
+
+</TwoColumnSection>
+
+## Code
+
+<TwoColumnSection>
+
+### Overview
+
+Code blocks can be added to your docs using markdown syntax:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````
+```js
+() => {
+  return ...
+}
+```
+````
+
+</CodeExample>
+
+The programming language (e.g., `js`) should be specified after the first three backticks (```` ``` ````) so that <a href="https://www.prismjs.com">Prism.js</a> can determine how to highlight the code. Since <a href="https://github.com/FormidableLabs/prism-react-renderer">`prism-react-renderer`</a> is used behind the scenes, Chicago Docs supports only those languages supported by that plugin. These languages are listed <a href="https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js">here</a>.
+
+Line highlighting, line numbers, and live preview are rendered through the **metastring**, which is the text that follows the three backticks and the language value as described above. For example, in ```` ```js {3} ````, the metastring is `{3}` and adds highlighting to line 3 of the code block. 
+
+This section describes how to add line highlighting, line numbers, and live previews.
+
+<Alert variant="warning">
+
+You need to specify the **language** in order for the metastring value to be used. For example, ```` ``` {3} ```` will not produce line highlighting. If you don't want any Prism code highlighting but want to add line highlighting or other features, you can use the 'shell' language:
+
+```` ```sh {3} ````
+
+</Alert>
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Line numbers
+
+Add line numbers by adding `num` to the metastring:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````
+```js num
+if (Array.isArray(languages)) {
+  languages.forEach(language => {
+    if (languages[language]) {
+      console.log(language);
+    } else {
+      console.warn('This language does not exist!');
+    }
+  });
+}
+```
+````
+
+</CodeExample>
+
+This adds the line number to the beginning of each line:
+
+```js num
+if (Array.isArray(languages)) {
+  languages.forEach(language => {
+    if (languages[language]) {
+      console.log(language);
+    } else {
+      console.warn('This language does not exist!');
+    }
+  });
+}
+```
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Line highlighting
+
+Indicate the lines to be highlighted by adding them between curly braces (`{}`) to the metastring for the code block. To add separate line numbers, use commas (`,`). Do not add spaces between commas. To indicate a range of lines, use a hyphen (`-`):
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````
+```js {1,2,5-7}num
+if (Array.isArray(languages)) {
+  languages.forEach((language) => {
+    if (languages[language]) {
+      console.log(language);
+    } else {
+      console.warn('This language does not exist!');
+    }
+  });
+}
+```
+````
+
+</CodeExample>
+
+This produces the following highlights:
+
+```js {1,2,5-7}num
+if (Array.isArray(languages)) {
+  languages.forEach((language) => {
+    if (languages[language]) {
+      console.log(language);
+    } else {
+      console.warn('This language does not exist!');
+    }
+  });
+}
+```
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+### Live preview
+
+To enable a live preview using markdown syntax, the metastring should exactly equal `'live'`:
+
+<CodeExample title="example.mdx" labels={['MDX']}>
+
+````
+```js live
+<button>Just another button example</button>
+```
+````
+
+</CodeExample>
+
+```js live
+<button>Just another button example</button>
+```
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Hooks
+
+This theme's React hooks are a convenient way to access data about your site or the current post. They allow you to access metadata, theme options, sidebar menus, and the table of contents. They're meant to be used in custom or <a href="/docs/styling-and-shadowing/">shadowed</a> components. Import them from `@kabartolo/gatsby-theme-chicago-docs/src/hooks`.
+
+Note that the `@kabartolo/gatsby-theme-chicago-docs-core` theme also comes with some of these hooks (as noted in the table below).
+
+Use these hooks in your custom components to fetch data:
+
+| Hook | Parameters | Purpose | In Core |
+| ---- | ----- | ------- | --- |
+| useDocContext | | Fetches the `docId` and sidebar `menu` object for the current doc. | No |
+| useDocData | | Fetches all GraphQL data for all docs (see below). | Yes |
+| useLocation | | Fetches the browser's `location` object. | No |
+| usePrismTheme | | Fetches the current Prism theme (according to the current color mode). | No |
+| useSiteMetadata | | Fetches the site metadata defined in `gatsby-config.js`. | Yes |
+| useTableOfContents | `{ depth = 6, docId = '', path = '' }` | Fetches the table of contents for all docs in an array of objects, each object including the doc `id`, a `nested` object, and a `flatMap` array. Pass the `docId` or current `path` to get the object for a specific doc. The `depth` value specifies the depth of the `nested` object (does not affect `flatMap`). | Yes |
+| useThemeOptions | | Fetches the Chicago Docs theme options defined in `gatsby-config.js`. | Yes |
+
+The `useDocData` hook returns an array of nodes with the following information about each doc:
+
+```
+id
+title
+shortTitle
+description
+path
+slug
+excerpt
+body
+showBreadcrumb
+showPostNav
+showSidebar
+showTOC
+```
+
+<Alert>
+
+See <a href="/docs/configuration/">Configuration</a> for more details on theme options and frontmatter.
+
+</Alert>
+
+The following example demonstrates how these hooks can be used. You can call `useDocData` to get a list of all docs on your site. You can then create a navigable list of docs:
+
+<CodeExample title="doc-list.js" labels={['JavaScript']}>
+
+```js {7}num
+import React from 'react';
+import { Link } from 'gatsby';
+
+import { useDocData } from '@kabartolo/gatsby-theme-chicago-docs/src/hooks';
+
+export default function DocList() {
+  const docs = useDocData();
+
+  return (
+    <ul>
+      {docs.map((doc) => (
+        <li key={doc.id}>
+          <a href={doc.path}>{doc.title}</a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+```
+
+</CodeExample>
+
+</TwoColumnSection>
