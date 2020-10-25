@@ -1,5 +1,5 @@
 module.exports = {
-  pathPrefix: '/chicago-docs',
+  pathPrefix: '/chicago-docs-demo',
   siteMetadata: {
     title: 'Chicago Docs',
     description: 'Documentation and demo site for Chicago Docs Gatsby theme',
