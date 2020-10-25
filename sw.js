@@ -27,7 +27,7 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-deb52aee6072c9107a5a.js"
+    "url": "webpack-runtime-2ed3923140e0c27731b6.js"
   },
   {
     "url": "styles.4cda2cc011b8eba18b8a.css"
@@ -51,21 +51,57 @@ self.__precacheManifest = [
     "url": "a1bc03cf-434e6f001a27b3bb324c.js"
   },
   {
-    "url": "app-d07af9928ca1fc798630.js"
+    "url": "app-2024a8a93de8c5161c71.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "f28dc0e98a32a7cfad7987a9b4b4f460"
+    "revision": "9edf788b3f094c83a2e928ae0b9be994"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-8153cacf8ae837316f5f.js"
+  },
+  {
+    "url": "page-data/offline-plugin-app-shell-fallback/page-data.json",
+    "revision": "3ad26d01f711b240c2e2928515a0c15d"
+  },
+  {
+    "url": "page-data/sq/d/1013078630.json",
+    "revision": "7e3d19d49c77bd9f18c69cdd42e6b7e8"
+  },
+  {
+    "url": "page-data/sq/d/2126155663.json",
+    "revision": "02c065135836b84dfd61a3058a685c22"
+  },
+  {
+    "url": "page-data/sq/d/2135897355.json",
+    "revision": "b23d15c239487ae3eb738d8bc91a7c80"
+  },
+  {
+    "url": "page-data/sq/d/2823672990.json",
+    "revision": "e7aaf3f95bd739a5b56acf7722b76648"
+  },
+  {
+    "url": "page-data/sq/d/3216105679.json",
+    "revision": "b17a7073192f9d114930c7ad1d87f192"
+  },
+  {
+    "url": "page-data/sq/d/3235971795.json",
+    "revision": "d12e895936492b6c07a60592c74bb33f"
+  },
+  {
+    "url": "page-data/sq/d/727480955.json",
+    "revision": "11855235cd917c7dd8c42e6f0f155647"
+  },
+  {
+    "url": "page-data/app-data.json",
+    "revision": "8934e18453278d93f8341d974e094a20"
   },
   {
     "url": "polyfill-47e517e1ab47dcb70921.js"
   },
   {
     "url": "manifest.webmanifest",
-    "revision": "1e349d5a3c4b996d8bdf54b14cb598bf"
+    "revision": "462b6da4c24abb995396e5adf0b1855f"
   }
 ].concat(self.__precacheManifest || []);
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
@@ -152,12 +188,12 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   lastNavigationRequest = event.request.url
 
   let { pathname } = new URL(event.request.url)
-  pathname = pathname.replace(new RegExp(`^`), ``)
+  pathname = pathname.replace(new RegExp(`^/chicago-docs-demo`), ``)
 
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/app-d07af9928ca1fc798630.js`))) {
+  if (!resources || !(await caches.match(`/chicago-docs-demo/app-2024a8a93de8c5161c71.js`))) {
     return await fetch(event.request)
   }
 
@@ -170,7 +206,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
     }
   }
 
-  const offlineShell = `/offline-plugin-app-shell-fallback/index.html`
+  const offlineShell = `/chicago-docs-demo/offline-plugin-app-shell-fallback/index.html`
   const offlineShellWithKey = workbox.precaching.getCacheKeyForURL(offlineShell)
   return await caches.match(offlineShellWithKey)
 })
