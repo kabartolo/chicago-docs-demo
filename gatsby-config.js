@@ -5,8 +5,8 @@ module.exports = {
     description: 'Documentation and demo site for Chicago Docs Gatsby theme',
     siteLanguage: 'en',
     siteLogo: 'chicago-docs-logo.png',
-    siteUrl: `https://kabartolo.github.io/chicago-docs`,
-    githubUrl: `https://github.com/kabartolo/gatsby-themes/gatsby-theme-chicago-docs/`,
+    siteUrl: `https://kabartolo.github.io/chicago-docs-demo/`,
+    githubUrl: `https://github.com/kabartolo/chicago-docs-demo/`,
   },
   plugins: [
     {
