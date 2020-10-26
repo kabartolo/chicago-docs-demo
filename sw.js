@@ -27,10 +27,10 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-2ed3923140e0c27731b6.js"
+    "url": "webpack-runtime-deb18ae09cdc3c84593c.js"
   },
   {
-    "url": "styles.4cda2cc011b8eba18b8a.css"
+    "url": "styles.f65ece57239da22313a6.css"
   },
   {
     "url": "styles-407fe62976dc5310c43e.js"
@@ -51,11 +51,11 @@ self.__precacheManifest = [
     "url": "a1bc03cf-434e6f001a27b3bb324c.js"
   },
   {
-    "url": "app-2024a8a93de8c5161c71.js"
+    "url": "app-3f1af004c0247bdceaea.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "9edf788b3f094c83a2e928ae0b9be994"
+    "revision": "c79b43e47863ba7d36833633978e75b1"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-8153cacf8ae837316f5f.js"
@@ -66,15 +66,15 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/1013078630.json",
-    "revision": "7e3d19d49c77bd9f18c69cdd42e6b7e8"
+    "revision": "49b7c949d2f88f7ea6e5ba655f871fff"
   },
   {
     "url": "page-data/sq/d/2126155663.json",
-    "revision": "02c065135836b84dfd61a3058a685c22"
+    "revision": "6512452033357f17931c6f51ae54846b"
   },
   {
     "url": "page-data/sq/d/2135897355.json",
-    "revision": "b23d15c239487ae3eb738d8bc91a7c80"
+    "revision": "e539ddef0a825b26af56e085ec8a0214"
   },
   {
     "url": "page-data/sq/d/2823672990.json",
@@ -82,19 +82,19 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/3216105679.json",
-    "revision": "b17a7073192f9d114930c7ad1d87f192"
+    "revision": "d1778d4625eb433e656a52206d9110a6"
   },
   {
     "url": "page-data/sq/d/3235971795.json",
-    "revision": "d12e895936492b6c07a60592c74bb33f"
+    "revision": "3fc668d22df8278b595dd11268373f23"
   },
   {
     "url": "page-data/sq/d/727480955.json",
-    "revision": "11855235cd917c7dd8c42e6f0f155647"
+    "revision": "8d0b2d8701eec291683762e1302c3ed2"
   },
   {
     "url": "page-data/app-data.json",
-    "revision": "8934e18453278d93f8341d974e094a20"
+    "revision": "4f8d84bafab642a53c0e24b862798956"
   },
   {
     "url": "polyfill-47e517e1ab47dcb70921.js"
@@ -193,7 +193,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/chicago-docs-demo/app-2024a8a93de8c5161c71.js`))) {
+  if (!resources || !(await caches.match(`/chicago-docs-demo/app-3f1af004c0247bdceaea.js`))) {
     return await fetch(event.request)
   }
 
