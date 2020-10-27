@@ -55,7 +55,7 @@ self.__precacheManifest = [
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "7892e2a0e90c352f8175759f8eb57925"
+    "revision": "22ce5a4ef73bdfc41bcb32094e3ab1d7"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-8e03ed25f55e17579bf6.js"
@@ -74,7 +74,7 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/2135897355.json",
-    "revision": "9c1508d16786b71305419e9c183a9eaf"
+    "revision": "b0d74de9db5afcf0f68dcd71927d6f0d"
   },
   {
     "url": "page-data/sq/d/2823672990.json",
@@ -82,15 +82,15 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/3216105679.json",
-    "revision": "e95b7e85f2dc62dbe785218819d0562a"
+    "revision": "f94391ace59f144a27cb2f07d108768c"
   },
   {
     "url": "page-data/sq/d/3235971795.json",
-    "revision": "2a2b8e315d896673590e594a0d56c0de"
+    "revision": "b7b81523df82065a6fe19b0c62e82c6d"
   },
   {
     "url": "page-data/sq/d/727480955.json",
-    "revision": "d01791ce03423c5c6c6f1c3fcff5cf8f"
+    "revision": "ad73cf75e93891a78a9a64f6c1e0bc37"
   },
   {
     "url": "page-data/app-data.json",
