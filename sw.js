@@ -51,11 +51,11 @@ self.__precacheManifest = [
     "url": "a1bc03cf-f91182491ff25c8b714e.js"
   },
   {
-    "url": "app-dd9fa144c24e9fb08b28.js"
+    "url": "app-e85842e9ac2260eab001.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "22ce5a4ef73bdfc41bcb32094e3ab1d7"
+    "revision": "2ef7f8d38e381452039e157a3bf228e2"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-8e03ed25f55e17579bf6.js"
@@ -74,7 +74,7 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/2135897355.json",
-    "revision": "7ec414d9ca0d1960338b1a355e2bdd26"
+    "revision": "8d9778546f870c375077d40f8b49ae18"
   },
   {
     "url": "page-data/sq/d/2823672990.json",
@@ -82,19 +82,19 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/3216105679.json",
-    "revision": "b998b8e6b3cb610de5873e60bdc48bab"
+    "revision": "ee1bd7d02e390b45958bca7cf90e0681"
   },
   {
     "url": "page-data/sq/d/3235971795.json",
-    "revision": "22bd72ece31c917b2d6aa2ed7ae48f88"
+    "revision": "37d1c060a0d9c8534cfa6cb835130099"
   },
   {
     "url": "page-data/sq/d/727480955.json",
-    "revision": "9bae2d15f647ac3646c30469471b8900"
+    "revision": "98418224f4baf57aecf33cdf60706a6e"
   },
   {
     "url": "page-data/app-data.json",
-    "revision": "af8e68291140a9634678dccb6147ff35"
+    "revision": "84f6c12eb4010dcbf655681666a00da2"
   },
   {
     "url": "polyfill-1db93d3bf1625938f8c3.js"
@@ -193,7 +193,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/chicago-docs-demo/app-dd9fa144c24e9fb08b28.js`))) {
+  if (!resources || !(await caches.match(`/chicago-docs-demo/app-e85842e9ac2260eab001.js`))) {
     return await fetch(event.request)
   }
 
