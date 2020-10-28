@@ -2,6 +2,9 @@
 title: Quick Start
 description: 'A guide to getting started quickly for experienced developers'
 ---
+export const themeOptionsFragment = "#theme-options";
+export const demoPath = "https://kabartolo.github.io/chicago-docs-demo/";
+export const configDocsPath = "/docs/configuration/";
 
 <TwoColumnSection>
 
@@ -65,9 +68,9 @@ npm install @kabartolo/gatsby-theme-chicago-docs-core
 
 ## Quick Config
 
-The default configuration of `@kabartolo/gatsby-starter-chicago-docs` creates a site that looks and behaves like the <a href="https://kabartolo.github.io/chicago-docs">demo</a>. You'll just need to customize your site details in the `gatsby-config.js` file for your site. This creates the site metadata and configures the manifest file. It also adds a logo and favicon.
+The default configuration of `@kabartolo/gatsby-starter-chicago-docs` creates a site that looks and behaves like the <a href={demoPath}>demo</a>. You'll just need to customize your site details in the `gatsby-config.js` file for your site. This creates the site metadata and configures the manifest file. It also adds a logo and favicon.
 
-See <a href="/docs/configuration/">Configuration</a> for a more in-depth guide on configuring your site.
+See <a href={configDocsPath}>Configuration</a> for a more in-depth guide on configuring your site.
 
 ---
 
@@ -109,9 +112,17 @@ module.exports = {
 
 ## Menus
 
-The main menu and the sidebar menus are defined in your site's `gatsby-config.js` file. For more information on creating these menus, see <a href="/docs/configuration/menus">Configuration: Menus</a>.
+The main menu and the sidebar menus are defined in your site's `gatsby-config.js` file. For more information on creating these menus, see <a href={`${configDocsPath}menus`}>Configuration: Menus</a>.
 
-This example shows how the main menu and sidebar menus are defined for the demo site:
+This example shows how the main menu and sidebar menus are defined for the demo site.
+
+<Alert>
+
+If you specify `isGroup: true` for a list item, the item will appear as an accordion of posts from  `src/docs/{slug}` (see <a href={themeOptionsFragment}>theme options</a> to change where your docs live).
+
+</Alert>
+
+---
 
 <CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
 
@@ -155,21 +166,7 @@ module.exports = {
                   },
                 ],
               },
-              {
-                slug: 'mdx-guide',
-              },
-              {
-                slug: 'styling-and-shadowing',
-              },              
-              {
-                slug: 'components-and-hooks',
-              },
-              {
-                slug: 'errors',
-              },
-              {
-                slug: 'example-api-doc',
-              },              
+              // code omitted for brevity           
             ],
           },
           {
@@ -191,21 +188,17 @@ module.exports = {
 
 </CodeExample>
 
-<Alert>
-
-If you specify `isGroup: true` for a list item, the item will appear as an accordion of posts from the `slug` directory in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>). If you omit the `items` list from this group, all posts from this directory will be added automatically.
-
-</Alert>
-
 </TwoColumnSection>
 
 <TwoColumnSection>
 
 ## Theme Options
 
-Several options are available to customize your site's directory structure and how the site behaves. See <a href="/docs/configuration/site-options/#theme-options">Configuration: Theme Options</a> for more details.
+Several options are available to customize your site's directory structure and how the site behaves. See <a href={`${configDocsPath}site-options/#theme-options`}>Configuration: Theme Options</a> for more details.
 
-This example shows the theme options and their default values:
+This example shows the theme options and their default values.
+
+---
 
 <CodeExample title="site/gatsby-config.js" labels={['JavaScript']}>
 
@@ -218,6 +211,7 @@ module.exports = {
         assetsPath: 'src/assets',
         basePath: '/',
         docsPath: 'src/docs',
+        pagesPath: 'src/mdxPages',
         sidebarDepth: 3,
         allowDocsSearch: true,
         alwaysShowBreadcrumb: true,
@@ -244,15 +238,15 @@ module.exports = {
 
 ## Creating Docs
 
-Docs are MDX files that are displayed using the Doc page component. Docs can be navigated in the sidebar. A doc includes breadcrumb links at the top of the doc page; these are based on the nesting of the post in the <a href="/docs/configuration/menus/#sidebar-menu">sidebar menu</a> defined by you. The links to the previous and next docs at the bottom of the doc page are also determined by this sidebar menu.
+Docs are MDX files that are displayed using the Doc page component. Docs can be navigated in the sidebar. A doc includes breadcrumb links at the top of the doc page; these are based on the nesting of the post in the <a href={`${configDocsPath}menus/#sidebar-menu`}>sidebar menu</a> defined by you. The links to the previous and next docs at the bottom of the doc page are also determined by this sidebar menu.
 
 A table of contents (using the TOC component) also appears for each doc.
 
-You can turn off any of these features for all docs (see <a href="/docs/configuration/site-options/#theme-options">Configuration: Theme Options</a>) or for an individual doc (see <a href="/docs/configuration/site-options/#frontmatter">Configuration: Frontmatter</a>).
+You can customize how all docs appear using the appropriate <a href={themeOptionsFragment}>theme option</a>, such as `alwaysShowTOC`. You can customize an individual doc using the corresponding frontmatter field, such as `showTOC`.
 
-To create a doc, create an MDX file in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>):
+To create a doc, create an MDX file in `src/docs` (or the `docsPath` defined in the <a href={themeOptionsFragment}>theme options</a>):
 
-<CodeExample title="example-doc.mdx" labels={['MDX']}>
+<CodeExample title="src/docs/example-doc.mdx" labels={['MDX']}>
 
 ```js
 ---
@@ -268,12 +262,40 @@ showTOC: false
 ## The first header should be an h2
 
 This post will not show previous/next navigation or a table of contents since
-`showPostNav` and `showTOC` are set to `false`. It **will** show the sidebar and breadcrumb links. These boolean frontmatter fields are completely optional.
+`showPostNav` and `showTOC` are set to `false`.
 
 ```
 
 </CodeExample>
 
-See <a href="/docs/configuration/site-options/#frontmatter">Configuration: Frontmatter</a> for details on the available frontmatter fields.
+See <a href={`${configDocsPath}site-options/#frontmatter`}>Configuration: Frontmatter</a> for details on the available frontmatter fields.
+
+</TwoColumnSection>
+
+<TwoColumnSection>
+
+## Creating Pages
+
+Pages can be created using React, regular JavaScript, or MDX. An MDX file in `src/mdxPages` (or the `pagesPath` <a href={themeOptionsFragment}>theme option</a>) will be rendered using the Page component. This component provides all <a href="/docs/components-and-hooks/#chicago-docs-components">Chicago Docs components</a> but does **not** include layout features such as a sidebar or breadcrumb links.
+
+To create a non-doc page, create an MDX file in your specified `pagesPath` directory:
+
+<CodeExample title="src/mdxPages/example-doc.mdx" labels={['MDX']}>
+
+```js
+---
+title: Title for your page
+description: Brief description of the page (used in metadata)
+---
+
+## The first header should be an h2
+
+Use Chicago Docs components here.
+
+<TOC />
+
+```
+
+</CodeExample> 
 
 </TwoColumnSection>

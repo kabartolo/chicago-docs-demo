@@ -184,8 +184,9 @@ This table gives the name of each theme option, its type, whether it is optional
 | `assetsPath` | string | optional | `src/assets` | Directory for all assets used in your site. |
 | `basePath` | string | optional | `''` (empty string) | Base path of your docs site, such as `/docs`. |
 | `docsPath` | string | optional | `src/docs` |  Directory for all MDX docs for your site (i.e., MDX files that should use the Doc page component). |
-| `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
-| `sidebarMenus` | array of objects | optional | `[]` | List of menus that will appear in the sidebar of your site (see <a href="/docs/configuration/menus/#sidebar-menu">Configuration: Sidebar Menu</a>). |
+| `pagesPath` | string | optional | `'src/mdxPages'` |  Directory for your site's pages (i.e., JavaScript pages or MDX files that should use the Page page component). |
+| `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="https://kabartolo.github.io/chicago-docs-demo/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
+| `sidebarMenus` | array of objects | optional | `[]` | List of menus that will appear in the sidebar of your site (see <a href="https://kabartolo.github.io/chicago-docs-demo/docs/configuration/menus/#sidebar-menu">Configuration: Sidebar Menu</a>). |
 | `allowDocsSearch` | boolean | optional | `true` |  Whether a search index is populated with MDX files from the `docsPath` folder and whether a searchbar appears in the header. |
 | `alwaysShowBreadcrumb` | boolean | optional | `true` | Whether breadcrumb links are always displayed at the top of each doc. Can be overridden by the <a href="#frontmatter">`showBreadcrumb`</a> frontmatter field for an individual doc.|
 | `alwaysShowPostNav` | boolean | optional | `true` | Whether to always show links to the previous and next docs at the bottom of a doc page. Can be overridden by the <a href="#frontmatter">`showPostNav`</a> frontmatter field for an individual doc. |
