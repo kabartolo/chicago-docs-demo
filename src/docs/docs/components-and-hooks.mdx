@@ -326,9 +326,15 @@ This results in the following table:
 
 ### TOC
 
+<Alert>
+
+The TOC component works with MDX files of type Doc that have a table of contents. However, you can also pass a custom `contents` prop.
+
+</Alert>
+
 The TOC component is added automatically to MDX files in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) when the <a href="/docs/configuration/site-options/#theme-options">`alwaysShowTOC`</a> theme option is set to `true`. This can be overriden by the `showTOC` <a href="/docs/configuration/site-options/#frontmatter">frontmatter field</a> for an individual post.
 
-You can also insert a TOC component in any MDX file. It will produce a TOC for the current file.
+You can also insert a TOC component in a doc directly. It will produce a TOC for the current file.
 
 <CodeExample title="example.mdx" labels={['MDX']}>
 
@@ -347,7 +353,7 @@ This results in the following component (a table of contents for the current doc
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
 | `depth` | number | optional | `6` | Depth of nested items to print (between `2` and `6`). |
-| `contents` | object | optional | `null` | Custom table of contents with the following shape: `{ items: { title: '', url: '' } }`. Used by other components. |
+| `contents` | object | optional | `null` | Custom table of contents with the following shape: `{ items: [{ title: '', url: '' }] }`. Used by other components. |
 | `title` | string | optional | `''` (empty string) | Title displayed above list of contents. |
 | `className` | string | optional | `''` (empty string) | Class name added to the outer `div` tag, which also has a class name of `'toc-container'`. |
 
