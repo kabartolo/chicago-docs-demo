@@ -27,7 +27,7 @@ workbox.core.clientsClaim();
  */
 self.__precacheManifest = [
   {
-    "url": "webpack-runtime-890f0bd356be8a502bd3.js"
+    "url": "webpack-runtime-a2ecdbeca00a03e69ad1.js"
   },
   {
     "url": "styles.311648714310c2371986.css"
@@ -51,11 +51,11 @@ self.__precacheManifest = [
     "url": "a1bc03cf-f91182491ff25c8b714e.js"
   },
   {
-    "url": "app-f1d30e894e5a239858a4.js"
+    "url": "app-cf9e138f38f9bd61b0c7.js"
   },
   {
     "url": "offline-plugin-app-shell-fallback/index.html",
-    "revision": "f1a0ddedf8801b5c9d0e970f3d24d7e8"
+    "revision": "89372dc4e645bb721193c38d44be3066"
   },
   {
     "url": "component---cache-caches-gatsby-plugin-offline-app-shell-js-8e03ed25f55e17579bf6.js"
@@ -74,7 +74,7 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/2135897355.json",
-    "revision": "1fb7a0157b0a5e26c9b53f91e44eae43"
+    "revision": "f482af36bec71f6ecab61ae720605abd"
   },
   {
     "url": "page-data/sq/d/2823672990.json",
@@ -82,19 +82,19 @@ self.__precacheManifest = [
   },
   {
     "url": "page-data/sq/d/3216105679.json",
-    "revision": "52b81777150be5417e4a7d575ed6ad79"
+    "revision": "e8b4722091ba361f81b2428cd25d1a6c"
   },
   {
     "url": "page-data/sq/d/3235971795.json",
-    "revision": "303f625077ec13e2e0f74cef3df275d6"
+    "revision": "bc6d7c9307fef51e60bfbf802e4fff26"
   },
   {
     "url": "page-data/sq/d/727480955.json",
-    "revision": "a9e7a83675227e49b9dec67119e7cfce"
+    "revision": "ede00377e257c4079ee755f98a14fb6c"
   },
   {
     "url": "page-data/app-data.json",
-    "revision": "e3665b4db02cf6cf58e94cfdf4e9b4f2"
+    "revision": "4f84e0f6ce7964ce1f1ad1a5c73564d9"
   },
   {
     "url": "polyfill-1db93d3bf1625938f8c3.js"
@@ -193,7 +193,7 @@ const navigationRoute = new NavigationRoute(async ({ event }) => {
   // Check for resources + the app bundle
   // The latter may not exist if the SW is updating to a new version
   const resources = await idbKeyval.get(`resources:${pathname}`)
-  if (!resources || !(await caches.match(`/chicago-docs-demo/app-f1d30e894e5a239858a4.js`))) {
+  if (!resources || !(await caches.match(`/chicago-docs-demo/app-cf9e138f38f9bd61b0c7.js`))) {
     return await fetch(event.request)
   }
 
