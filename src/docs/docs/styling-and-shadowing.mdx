@@ -545,7 +545,9 @@ The following is a record of the Theme-UI theme object with all values currently
       }
     },
     "backgroundSecondary": "#fff",
+    "mediumGray": "grey",
     "border": "#e6e6e6",
+    "borderFocus": "rgba(3,102,214,.3)",
     "siteTitle": "#003049",
     "siteTitleHover": "#5b69cb",
     "alertLink": "#5b69cb",
@@ -1000,98 +1002,14 @@ The following is a record of the Theme-UI theme object with all values currently
       }
     }
   },
-  "links": {
-    "accordion": {
-      "fontSize": "1rem",
-      "textDecoration": "none",
+  "buttons": {
+    "default": {
+      "border": "none",
+      "bg": "inherit",
       "color": "text",
+      "cursor": "pointer",
       "fontWeight": "body",
-      ":hover": {
-        "color": "secondary",
-        "textDecoration": "underline"
-      },
-      "&.activePost": {
-        "color": "secondary",
-        "fontWeight": "bold"
-      },
-      "&.activeHeader": {
-        "color": "secondary"
-      }
-    },
-    "accordionGroup": {},
-    "dropdown": {
-      "fontSize": "1.1rem",
-      "color": "primary",
-      "textDecoration": "none",
-      "fontWeight": "heading"
-    },
-    "mainMenu": {
-      "fontSize": "1.1rem",
-      "color": "primary",
-      "textDecoration": "none",
-      "fontWeight": "heading",
-      ":hover": {
-        "textDecoration": "underline"
-      }
-    },
-    "navLink": {
-      "textDecoration": "none",
-      "color": "primary",
-      ":hover": {
-        "textDecoration": "underline",
-        ".nav-link-label": {
-          "color": "primary",
-          "fontWeight": "heading"
-        }
-      },
-      ".nav-link-label": {
-        "color": "text"
-      },
-      ".nav-link-title": {
-        "color": "primary",
-        "fontWeight": "heading"
-      }
-    },
-    "postList": {
-      "textDecoration": "none",
-      ":hover": {
-        "textDecoration": "underline"
-      }
-    },
-    "searchResult": {
-      "color": "text",
-      "textDecoration": "none"
-    },
-    "sidebarLabel": {
-      "color": "secondary",
-      "textDecoration": "none",
-      "h2": {
-        "fontSize": "1.2rem"
-      }
-    },
-    "siteTitle": {
-      "color": "siteTitle",
-      "textDecoration": "none",
-      ":hover": {
-        "color": "siteTitleHover"
-      },
-      ".header-site-title-text": {
-        "fontFamily": "Raleway, \"Open Sans\", sans-serif",
-        "fontSize": "16px",
-        "fontWeight": "heading",
-        "letterSpacing": "1px"
-      }
-    },
-    "toc": {
-      "color": "grey",
-      "textDecoration": "none",
-      ":hover": {
-        "color": "secondary",
-        "textDecoration": "underline"
-      },
-      "&.activeHeader": {
-        "color": "secondary"
-      }
+      "outline": "none"
     }
   },
   "borders": {
@@ -1100,48 +1018,35 @@ The following is a record of the Theme-UI theme object with all values currently
     "thicker": "4px solid",
     "thickest": "7px solid"
   },
-  "buttons": {
-    "plain": {
-      "border": "none",
-      "bg": "inherit",
-      "color": "text",
-      "cursor": "pointer",
-      "fontWeight": "body",
-      "outline": "none"
-    },
-    "copy": {
-      "cursor": "pointer",
-      "bg": "transparent",
-      "border": "none",
-      "&[disabled]": {
-        "cursor": "none"
-      }
-    }
-  },
   "icons": {
-    "plain": {
+    "default": {
       "fontSize": "1.5rem",
       "color": "text",
       "margin": "0 15px"
+    }
+  },
+  "links": {
+    "layout": {
+      "fontSize": "1.1rem",
+      "textDecoration": "none",
+      "color": "primary",
+      "fontWeight": "heading",
+      ":hover": {
+        "textDecoration": "underline"
+      }
     },
-    "search": {
-      "color": "#b3b3b3"
-    },
-    "sun": {
-      "color": "accent"
+    "hover": {
+      "color": "text",
+      "textDecoration": "none",
+      "fontWeight": "body",
+      ":hover": {
+        "color": "secondary",
+        "textDecoration": "underline"
+      }
     }
   },
   "listItems": {
-    "dropdown": {
-      "listStyle": "none",
-      "borderBottom": "main",
-      "borderColor": "border",
-      ":first-of-type": {
-        "borderTop": "main",
-        "borderColor": "border"
-      }
-    },
-    "plain": {
+    "layout": {
       "listStyle": "none"
     }
   }
