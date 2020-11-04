@@ -33,12 +33,7 @@ In the following example, the text `"Attention!"` is a child of the Alert compon
 
 See also <a href="/docs/mdx-guide/mdx-guide/#jsx-syntax">Guide to MDX: JSX Syntax</a>.
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
----
-title: Title of example MDX file
----
+```mdx live
 
 ## Example Subheader
 
@@ -47,9 +42,8 @@ title: Title of example MDX file
 Please pay attention to me!
 
 </Alert>
-```
 
-</CodeExample>
+```
 
 </TwoColumnSection>
 
@@ -121,10 +115,8 @@ A copy button is also included.
 
 This meta-example demonstrates the CodeExample component *using* the CodeExample component:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-````js
-<CodeExample title="GET" labels={['JavaScript', 'curl']}>
+````mdx live
+<CodeExample title="GET" labels={['JavaScript', 'cURL']}>
 
 ```js
 const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
@@ -137,23 +129,6 @@ curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
 
 </CodeExample>
 ````
-
-</CodeExample>
-
-This results in the following component:
-
-<CodeExample title="GET" labels={['JavaScript', 'curl']}>
-
-```js
-const response = await fetch('https://hipsum.co/api/?type=hipster-centric&sentences=3');
-const hipsterIpsum = response.json();
-```
-
-```sh
-curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
-```
-
-</CodeExample>
 
 <PropertyTable title="CodeExample props">
 
@@ -179,16 +154,9 @@ This component is meant to be used in MDX files only, as it expects code blocks 
 
 This component creates an external link that opens in a new tab, which is indicated by an external-window icon. This component is used automatically in docs for any <a href="/docs/mdx-guide/mdx-guide/#links">Markdown or HTML links</a> with an `href` attribute starting with `'http'`. For example, `<a href="https://en.wikipedia.org">Wikipedia</a>` becomes <a href="https://en.wikipedia.org">Wikipedia</a>. You can also use the component directly if you prefer:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
+```mdx live
 <ExternalLink href="https://en.wikipedia.org/wiki/Cats_and_the_Internet">Cats and the Internet</ExternalLink>
 ```
-
-This produces the following link: 
-<ExternalLink href="https://en.wikipedia.org/wiki/Cats_and_the_Internet">Cats and the Internet</ExternalLink>
-
-</CodeExample>
 
 <PropertyTable title="ExternalLink props">
 
@@ -207,17 +175,9 @@ This produces the following link:
 
 The Image component from Chicago Docs uses `gatsby-image` to optimize and lazy load an image. This component renders a fluid image that adjusts to the size of your screen. You can also use the `Img` component from `gatsby-image` directly. See <a href="https://www.gatsbyjs.com/plugins/gatsby-image/">`gatsby-image`</a> for guidance.
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
+```mdx live
 <Image src="aleksey-milov-unsplash.jpg" alt="Cat loaf" />
 ```
-
-</CodeExample>
-
-This will render a fluid image (try changing the size of your screen):
-
-<Image src="aleksey-milov-unsplash.jpg" alt="Cat loaf" />
 
 <span>Photo by <a href="https://unsplash.com/@phamap?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Aleksey Milov</a> on <a href="https://unsplash.com/s/photos/cat-angry?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></span>
 
@@ -239,7 +199,7 @@ This will render a fluid image (try changing the size of your screen):
 
 This component is intended to be used in the `index.mdx` file of a directory. It prints a list of posts in that directory. For example, placing this at `your-site.com/tutorials/configuration/` will return a list of all posts with the base path of `/tutorials/configuration/`, such as `/tutorials/configuration/how-to-configure-gatsby.mdx`.
 
-The following example demonstrates use of the PostList component:
+The following example demonstrates use of the PostList component in the `index.mdx` of a directory called `tutorials`:
 
 <CodeExample title="src/docs/tutorials/index.mdx" labels={['MDX']}>
 
@@ -250,7 +210,7 @@ description: Demonstration of the PostList component
 showTOC: false
 ---
 
-This component will print a list of docs in the `tutorials` directory of the `docsPath` directory, such as `src/docs/tutorials/how-to-install-ubuntu.mdx`.
+This component will print a list of docs in the `tutorials` directory, such as `src/docs/tutorials/how-to-install-ubuntu.mdx`.
 
 ## Table of contents:
 
@@ -268,9 +228,7 @@ This component will print a list of docs in the `tutorials` directory of the `do
 
 This table component provides a neat way of listing the properties or attributes of a React component or other entity. It wraps a regular Markdown table that has specific header values (`Name`, `Type`, `Info`, `Default`, and `Description`). In fact, it's used to create its own props table here:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
+```mdx live
 <PropertyTable title="PropertyTable props">
 
 | Name | Type | Info | Default | Description |
@@ -280,45 +238,19 @@ This table component provides a neat way of listing the properties or attributes
 
 </PropertyTable>
 ```
-
-</CodeExample>
-
-<PropertyTable title="PropertyTable props">
-
-| Name | Type | Info | Default | Description |
-| ---- | ---- | ---- | ------- | ----------- |
-| `title` | string | optional | `''` (empty string) | Title that appears in the header of the table. |
-| `children` | React node or array of nodes | required | | Markdown table placed between PropertyTable tags. Table headers should be `Name`, `Type`, `Info`, `Default`, and/or `Description` (order not important). Other table headers will be ignored. |
-
-</PropertyTable>
 
 *Note.* If a value for the `Default` column is included, it will appear following the string `'default:'`. You can get around this by omitting a default value and adding it elsewhere:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
+```mdx live
 <PropertyTable title="Resource properties">
 
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
-| `type` | string | optional (default: `'array'`) | | Type of the resource, one of `'array'` or `'object'`. |
+| `type` | string | optional (default value: `'array'`) | | Type of the resource, one of `'array'` or `'object'`. |
 | `owner` | string | required | | Owner of the resource. |
 
 </PropertyTable>
 ```
-
-</CodeExample>
-
-This results in the following table:
-
-<PropertyTable title="Resource properties">
-
-| Name | Type | Info | Default | Description |
-| ---- | ---- | ---- | ------- | ----------- |
-| `type` | string | optional (default: `'array'`) | | Type of the resource, one of `'array'` or `'object'`. |
-| `owner` | string | required | | Owner of the resource. |
-
-</PropertyTable>
 
 </TwoColumnSection>
 
@@ -336,17 +268,9 @@ The TOC component is added automatically to MDX files in `src/docs` (or the `doc
 
 You can also insert a TOC component in a doc directly. It will produce a TOC for the current file.
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-```js
+```mdx live
 <TOC depth={2} />
 ```
-
-</CodeExample>
-
-This results in the following component (a table of contents for the current doc):
-
-<TOC depth={2} />
 
 <PropertyTable title="TOC props">
 
@@ -361,7 +285,7 @@ This results in the following component (a table of contents for the current doc
 
 <Alert>
 
-The Sidebar and TOC components both track the active header in the viewport as the user scrolls, and they highlight the corresponding header in their respective list of posts. This highlighting can seem to jump around if you have nested headers in your post. To prevent this, surround the nested sections with an HTML element, such as a `<section>` or the <a href="#twocolumnsection">TwoColumnSection</a> component. Each section should include the nested header and its paragraphs:
+The Sidebar and TOC components both track the active header in the viewport as the user scrolls, and they highlight the corresponding header in their respective list of posts. This highlighting can seem to jump around if you have nested headers in your post. To prevent this, you can surround the nested sections with an HTML element, such as a `<section>` or the <a href="#twocolumnsection">TwoColumnSection</a> component. Each section should include the nested header and its paragraphs:
 
 ```js
 
@@ -512,7 +436,7 @@ There are three link types with different behaviors on a Chicago Docs site:
 | ---- | -------- | ---- | --------- | ------- |
 | <a href="https://www.gatsbyjs.com/docs/linking-between-pages/#using-a-for-external-links">External link</a> | Opens in a new tab and includes a new-window icon | Starts with `'http'` | <a href="#externallink">ExternalLink</a> | [GitHub](https://www.github.com) |
 | Internal link | Navigates to other pages on the same site without a page refresh | Relative path (e.g., `/docs/quick-start/`) | <a href="https://www.gatsbyjs.com/docs/gatsby-link/">Gatsby Link</a> | [Quick Start](/docs/quick-start/) |
-| Fragment link | Jumps to a different location on the same page without a page refresh | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Theme-UI Components](#theme-ui-components) | 
+| Fragment link | Jumps to a different location on the same page without a page refresh | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Code](#code) | 
 
 Create a link using either Markdown or HTML:
 
@@ -534,9 +458,8 @@ You can also use the Gatsby Link and ExternalLink components directly if you pre
 
 Code blocks can be added to your docs using markdown syntax:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
 
-````
+````mdx live
 ```js
 () => {
   return ...
@@ -544,9 +467,19 @@ Code blocks can be added to your docs using markdown syntax:
 ```
 ````
 
-</CodeExample>
+The programming language (e.g., `js`) should be specified after the first three backticks (```` ``` ````) so that <a href="https://www.prismjs.com">Prism.js</a> can determine how to highlight the code. Since <a href="https://github.com/FormidableLabs/prism-react-renderer">`prism-react-renderer`</a> is used behind the scenes, Chicago Docs supports the languages supported by that plugin. These languages are listed <a href="https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js">here</a>.
 
-The programming language (e.g., `js`) should be specified after the first three backticks (```` ``` ````) so that <a href="https://www.prismjs.com">Prism.js</a> can determine how to highlight the code. Since <a href="https://github.com/FormidableLabs/prism-react-renderer">`prism-react-renderer`</a> is used behind the scenes, Chicago Docs supports only those languages supported by that plugin. These languages are listed <a href="https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js">here</a>.
+Chicago Docs also supports the `mdx` language for use in live previews of MDX:
+
+````mdx live
+```mdx live
+
+## Header
+
+<a href="/">Home</a>
+
+```
+````
 
 Line highlighting, line numbers, and live preview are rendered through the **metastring**, which is the text that follows the three backticks and the language value as described above. For example, in ```` ```js {3} ````, the metastring is `{3}` and adds highlighting to line 3 of the code block. 
 
@@ -568,9 +501,7 @@ You need to specify the **language** in order for the metastring value to be use
 
 Add line numbers by adding `num` to the metastring:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-````
+````mdx live
 ```js num
 if (Array.isArray(languages)) {
   languages.forEach(language => {
@@ -583,22 +514,6 @@ if (Array.isArray(languages)) {
 }
 ```
 ````
-
-</CodeExample>
-
-This adds the line number to the beginning of each line:
-
-```js num
-if (Array.isArray(languages)) {
-  languages.forEach(language => {
-    if (languages[language]) {
-      console.log(language);
-    } else {
-      console.warn('This language does not exist!');
-    }
-  });
-}
-```
 
 </TwoColumnSection>
 
@@ -608,9 +523,7 @@ if (Array.isArray(languages)) {
 
 Indicate the lines to be highlighted by adding them between curly braces (`{}`) to the metastring for the code block. To add separate line numbers, use commas (`,`). Do not add spaces between commas. To indicate a range of lines, use a hyphen (`-`):
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-````
+````mdx live
 ```js {1,2,5-7}num
 if (Array.isArray(languages)) {
   languages.forEach((language) => {
@@ -623,22 +536,6 @@ if (Array.isArray(languages)) {
 }
 ```
 ````
-
-</CodeExample>
-
-This produces the following highlights:
-
-```js {1,2,5-7}num
-if (Array.isArray(languages)) {
-  languages.forEach((language) => {
-    if (languages[language]) {
-      console.log(language);
-    } else {
-      console.warn('This language does not exist!');
-    }
-  });
-}
-```
 
 </TwoColumnSection>
 
@@ -648,19 +545,11 @@ if (Array.isArray(languages)) {
 
 To enable a live preview using markdown syntax, the metastring should exactly equal `'live'`:
 
-<CodeExample title="example.mdx" labels={['MDX']}>
-
-````
+````mdx live
 ```js live
 <button>Just another button example</button>
 ```
 ````
-
-</CodeExample>
-
-```js live
-<button>Just another button example</button>
-```
 
 </TwoColumnSection>
 
@@ -674,7 +563,7 @@ Note that the `@kabartolo/gatsby-theme-chicago-docs-core` theme also comes with 
 
 Use these hooks in your custom components to fetch data:
 
-| Hook | Parameters | Purpose | In Core |
+| Hook | Parameters | Purpose | Core |
 | ---- | ----- | ------- | --- |
 | useDocContext | | Fetches the `docId` and sidebar `menu` object for the current doc. | No |
 | useDocData | | Fetches all GraphQL data for all docs (see below). | Yes |
@@ -703,7 +592,7 @@ showTOC
 
 <Alert>
 
-See <a href="/docs/configuration/">Configuration</a> for more details on theme options and frontmatter.
+See <a href="/docs/configuration/site-options/">Configuration: Site Options</a> for more details on theme options and frontmatter.
 
 </Alert>
 
