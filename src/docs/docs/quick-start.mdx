@@ -276,7 +276,9 @@ See <a href={`${configDocsPath}site-options/#frontmatter`}>Configuration: Frontm
 
 ## Creating Pages
 
-Pages can be created using React, regular JavaScript, or MDX. An MDX file in `src/mdxPages` (or the `pagesPath` <a href={themeOptionsFragment}>theme option</a>) will be rendered using the Page component. This component provides all <a href="/docs/components-and-hooks/#chicago-docs-components">Chicago Docs components</a> but does **not** include layout features such as a sidebar or breadcrumb links.
+Any MDX file in `src/mdxPages` (or the `pagesPath` <a href={themeOptionsFragment}>theme option</a>) will be rendered using the Page component. This component provides all <a href="/docs/components-and-hooks/#chicago-docs-components">Chicago Docs components</a> but does **not** include layout features such as a sidebar or breadcrumb links.
+
+Note that the TOC and PostList components will work **only** with <a href="#creating-docs">Doc pages</a>. The TOC component relies on a Doc to have a table of contents, while the PostList component depends on the <a href="#menus">sidebar menus</a> you've defined.
 
 To create a non-doc page, create an MDX file in your specified `pagesPath` directory:
 
@@ -292,7 +294,11 @@ description: Brief description of the page (used in metadata)
 
 Use Chicago Docs components here.
 
-<TOC />
+<Alert variant="success">
+
+This is a great success.
+
+</Alert>
 
 ```
 
