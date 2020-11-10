@@ -67,7 +67,7 @@ Consider this a warning!
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
 | `variant` | string | optional | `"information"` | Style variant, one of `"information"` (blue), `"success"` (green), `"warning"` (orange), and `"error"` (red). |
-| `children` | React node or array of nodes | required | | MDX text placed between Alert tags. This text is rendered inside the Alert box. |
+| `children` | React node or React node[] | required | | MDX text placed between Alert tags. This text is rendered inside the Alert box. |
 
 </PropertyTable>
 
@@ -135,8 +135,8 @@ curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
 | `title` | string | optional | `''` (empty string) | Title appearing in the top bar of the CodeExample container. |
-| `labels` | array of strings | optional | `[]` | Array of strings describing the language or other aspect of each code block (the number of labels should equal the number of code blocks and be in the same order). If more than one label is present, the labels are displayed in a select box allowing users to switch between examples. A single label will be displayed as text. |
-| `children` | React node or array of nodes | required | | MDX code blocks placed between CodeExample tags. |
+| `labels` | string[] | optional | `[]` | Array of strings describing the language or other aspect of each code block (the number of labels should equal the number of code blocks and be in the same order). If more than one label is present, the labels are displayed in a select box allowing users to switch between examples. A single label will be displayed as text. |
+| `children` | React node or React node[] | required | | MDX code blocks placed between CodeExample tags. |
 
 </PropertyTable>
 
@@ -163,6 +163,7 @@ This component creates an external link that opens in a new tab, which is indica
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
 | `href` | string | required | | External URL that will open in a new tab when the component is clicked.|
+| `showIcon` | boolean | optional | `true` | Whether to show the new-window icon. You might not want the icon for non-text links such as images.
 | `children` | React node | required | | MDX text placed between ExternalLink tags, used to display the link.|
 
 </PropertyTable>
@@ -234,7 +235,7 @@ This table component provides a neat way of listing the properties or attributes
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
 | `title` | string | optional | `''` (empty string) | Title that appears in the header of the table. |
-| `children` | React node or array of nodes | required | | Markdown table placed between PropertyTable tags. Table headers should be `Name`, `Type`, `Info`, `Default`, and/or `Description` (order not important). Other table headers will be ignored. |
+| `children` | React node or React node[] | required | | Markdown table placed between PropertyTable tags. Table headers should be `Name`, `Type`, `Info`, `Default`, and/or `Description` (order not important). Other table headers will be ignored. |
 
 </PropertyTable>
 ```
@@ -325,7 +326,7 @@ The TwoColumnSection component creates a `<section>` HTML tag and is styled in a
 
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
-| `children` | React node or array of nodes | required | | MDX text placed between TwoColumnSection tags. Each child can be any valid MDX text, but it works best with code blocks and CodeExample components. |
+| `children` | React node or React node[] | required | | MDX text placed between TwoColumnSection tags. Each child can be any valid MDX text, but it works best with code blocks and CodeExample components. |
 
 </PropertyTable>
 
@@ -438,12 +439,10 @@ There are three link types with different behaviors on a Chicago Docs site:
 | Internal link | Navigates to other pages on the same site without a page refresh | Relative path (e.g., `/docs/quick-start/`) | <a href="https://www.gatsbyjs.com/docs/gatsby-link/">Gatsby Link</a> | [Quick Start](/docs/quick-start/) |
 | Fragment link | Jumps to a different location on the same page without a page refresh | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Code](#code) | 
 
-Create a link using either Markdown or HTML:
+Create a Markdown link in an MDX file, and the appropriate link type will be used:
 
-```
+```mdx live
 [Github](https://www.github.com)
-
-<a href="https://www.github.com" target="_blank" rel="noopener noreferrer">Github</a>
 ```
 
 You can also use the Gatsby Link and ExternalLink components directly if you prefer.

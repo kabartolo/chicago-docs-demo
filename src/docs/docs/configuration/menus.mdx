@@ -81,7 +81,7 @@ Groups and single posts can be styled differently to visually distinguish them. 
 
 </Alert>
 
-To create a sidebar menu, add an array called `sidebarMenus` to `gatsby-config.js` with the following properties:
+To create a sidebar menu, add an array called `sidebarMenus` to the `gatsby-config.js` options. This array is a list of objects with the following properties:
 
 <TwoColumnSection>
 
@@ -159,7 +159,7 @@ Each item in the `items` list can have the following properties:
 | `name` | string | optional | value of frontmatter `shortTitle` or `title` for the doc (or for the `index.mdx` file of a group) | Label for the doc or group of docs in the sidebar (e.g., `'Gatsby Tutorials'`). Also used in the breadcrumb link for this part of the path. |
 | `slug` | string | required | | Slug for a single doc (e.g., `'how-to-write-tutorials'`) or the directory for a group of docs (e.g., `'jekyll'`).
 | `isGroup` | boolean | optional | `false` | Whether this item represents a directory of docs. |
-| `items` | array of objects | optional | all docs in `slug` directory | List of docs in custom order to be displayed in the menu. If omitted, all docs in this directory are added automatically. |
+| `items` | object[] | optional | all docs in `slug` directory | List of docs in custom order to be displayed in the menu. If omitted, all docs in this directory are added automatically. |
 
 </PropertyTable>
 

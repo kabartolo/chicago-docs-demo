@@ -141,8 +141,8 @@ Several theme options help you customize how your site behaves.
 | `basePath` | string | optional | `''` (empty string) | Base path of your docs site, such as `/docs`. |
 | `docsPath` | string | optional | `'src/docs'` |  Directory for all MDX docs for your site (i.e., MDX files that should use the Doc page component). |
 | `pagesPath` | string | optional | `'src/mdxPages'` |  Directory for your site's pages (i.e., MDX files that should use the Page page component). |
-| `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
-| `sidebarMenus` | array of objects | optional | `[]` | List of menus that will appear in the sidebar of your site (see <a href="/docs/configuration/menus/#sidebar-menu">Configuration: Sidebar Menu</a>). |
+| `mainMenu` | object[] | optional | `[]` | List of menu items that will appear in the header (see <a href="/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
+| `sidebarMenus` | object[] | optional | `[]` | List of menus that will appear in the sidebar of your site (see <a href="/docs/configuration/menus/#sidebar-menu">Configuration: Sidebar Menu</a>). |
 | `allowDocsSearch` | boolean | optional | `true` |  Whether a search index is fully populated with MDX files from the `docsPath` folder. Set to `false` to use a different search strategy. |
 | `alwaysShowBreadcrumb` | boolean | optional | `true` | Whether breadcrumb links are always displayed at the top of each doc. Can be overridden by the <a href="#frontmatter">`showBreadcrumb`</a> frontmatter field for an individual doc.|
 | `alwaysShowPostNav` | boolean | optional | `true` | Whether to always show links to the previous and next docs at the bottom of a doc page. Can be overridden by the <a href="#frontmatter">`showPostNav`</a> frontmatter field for an individual doc. |

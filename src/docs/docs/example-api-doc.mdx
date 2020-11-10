@@ -20,7 +20,7 @@ Access to this API is free and available 24/7. Reqres does **not** store request
 <CodeExample title="BASE URL">
 
 ```
-https://reqres.in/api/
+https://reqres.in
 ```
 
 </CodeExample>
@@ -35,8 +35,8 @@ A **User** resource represents a fake user with attributes such as `first_name` 
 
 <PropertyTable title="User attributes">
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type | Description | Default | Info |
+| ---- | ---- | ----------- | ------- | ---- |
 | `id` | number | Unique identifier for the user. |
 | `email` | string | A fake email address that might be used to authenticate the user if the data were real. |
 | `first_name` | string | A fake first name for the user. |
@@ -83,8 +83,8 @@ To retrieve a specific user, make a GET request to this endpoint and provide the
 
 <PropertyTable title="Parameters">
 
-| Name | Type | Info | Description |
-| ---- | ---- | ---- | ----------- |
+| Name | Type | Info | Description | Default |
+| ---- | ---- | ---- | ----------- | ------- |
 | `id` | number | required | The `id` of the user to be fetched. |
 
 </PropertyTable>
@@ -313,8 +313,8 @@ To update the data for an existing user, make a PUT or PATCH request to this end
 
 <PropertyTable title="Parameters">
 
-| Name | Type | Info | Description |
-| ---- | ---- | ---- | ----------- |
+| Name | Type | Info | Description | Default |
+| ---- | ---- | ---- | ----------- | ------- |
 | `id` | number | required | The `id` of the user to be updated. |
 
 </PropertyTable>
@@ -374,8 +374,8 @@ To delete an existing user, make a DELETE request to this endpoint. Provide the 
 
 <PropertyTable title="Parameters">
 
-| Name | Type | Info | Description |
-| ---- | ---- | ---- | ----------- |
+| Name | Type | Info | Description | Default |
+| ---- | ---- | ---- | ----------- | ------- |
 | `id` | number | required | The `id` of the user to be deleted. |
 
 </PropertyTable>
@@ -420,8 +420,8 @@ A **Color** resource represents a <a href="https://en.wikipedia.org/wiki/Pantone
 
 <PropertyTable title="Color attributes">
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
+| Name | Type | Description | Default | Info |
+| ---- | ---- | ----------- | ------- | ---- |
 | `id` | number | Unique identifier for the Color of the Year. |
 | `name` | string | Name of the color. |
 | `year` | number | Year the color was Color of the Year. |
@@ -468,8 +468,8 @@ To retrieve a specific color, make a GET request to this endpoint (replace 'anyt
 
 <PropertyTable title="Parameters">
 
-| Name | Type | Info | Description |
-| ---- | ---- | ---- | ----------- |
+| Name | Type | Info | Description | Default |
+| ---- | ---- | ---- | ----------- | ------- |
 | `id` | number | required | The `id` of the color to be fetched. |
 
 </PropertyTable>
