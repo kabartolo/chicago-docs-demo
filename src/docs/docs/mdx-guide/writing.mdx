@@ -8,9 +8,9 @@ description: 'Guide to the syntax of MDX and Markdown'
 
 ## Overview
 
-The <a href="https://mdxjs.com/">official MDX site</a> describes MDX as 'an authorable format that lets you seamlessly write JSX in your Markdown documents.'' This means you can import and embed React components right into your Markdown posts using JSX tags.
+The <a href="https://mdxjs.com/">official MDX site</a> describes MDX as 'an authorable format that lets you seamlessly write JSX in your Markdown documents.' This means you can import and embed React components right into your Markdown posts using JSX tags.
 
-If you prefer not to use MDX, you can also just write regular Markdown. Elements such as code blocks and tables are automatically styled by the theme (and these styles are <a href="/docs/styling-and-shadowing/#theme-ui">easily customized</a>), so you can focus on writing great content.
+If you prefer not to use MDX, you can instead write regular Markdown. Elements such as code blocks and tables are automatically styled by the theme (and these styles are <a href="/docs/styling-and-shadowing/#theme-ui">easily customized</a>), so you can focus on writing great content.
 
 </TwoColumnSection>
 
@@ -52,7 +52,7 @@ Don't forget those curly braces or you'll get a syntax error. See <a href="/docs
 
 ### Frontmatter
 
-A doc's frontmatter contains data about it, such as the `title` and `description`. Frontmatter is placed at the top of the MDX file between sets of three hyphens (---). Each frontmatter field should be placed on its own line. 
+Frontmatter contains data about the post, such as the `title` and `description`. It is written in [YAML](https://yaml.org/). Frontmatter is placed at the top of the MDX file between sets of three hyphens (---). Each frontmatter field should be placed on its own line. 
 
 See <a href="/docs/configuration/site-options/#frontmatter">Configuration: Frontmatter</a> for the available frontmatter fields in Chicago Docs.
 
@@ -82,8 +82,6 @@ To learn more about how frontmatter fields are used in Gatsby themes, see <a hre
 ## Markdown Syntax
 
 MDX is a combination of Markdown and JSX, and regular Markdown syntax can be used for most formatting. What follows is a guide to the Markdown syntax supported by Gatsby. Each section gives the Markdown syntax, the HTML element it creates, and a demonstration of the element.
-
-Note that the HTML equivalents can also be used instead of Markdown syntax. For example, you can write `<h1>This is a heading</h1>` instead of `# This is a heading` if you prefer.
 
 ### Headings
 
