@@ -11,13 +11,13 @@ This guide gets you set up quickly if you're already familiar with Gatsby. It as
 
 ### Start a new site
 
-To install the **starter** and create a **new site**, run:
+To install the <a href="https://github.com/kabartolo/gatsby-starter-chicago-docs">**starter**</a> and create a **new site**, run:
 
 ```
 gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs
 ```
 
-If you just want the data without the components or styling, use the **core starter** to start a docs site from scratch:
+If you just want the data without the components or styling, use the <a href="https://github.com/kabartolo/gatsby-starter-chicago-docs-core">**core starter**</a> to start a docs site from scratch:
 
 ```
 gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs-core
@@ -25,13 +25,13 @@ gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-do
 
 ### Add to an existing site
 
-To install just the **theme** to an **existing site**, run:
+To install just the <a href="https://github.com/kabartolo/gatsby-theme-chicago-docs">**theme**</a> to an **existing site**, run:
 
 ```
 npm install @kabartolo/gatsby-theme-chicago-docs
 ```
 
-To install just the **core theme** so you can style your docs from scratch, run:
+To install just the <a href="https://github.com/kabartolo/gatsby-theme-chicago-docs-core">**core theme**</a> so you can style your docs from scratch, run:
 
 ```
 npm install @kabartolo/gatsby-theme-chicago-docs-core
