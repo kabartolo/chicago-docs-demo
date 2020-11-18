@@ -239,11 +239,11 @@ module.exports = {
 
 ## Creating Docs
 
-Docs are MDX files that are displayed using the Doc page component. Docs can be navigated in the sidebar. A doc includes breadcrumb links at the top of the doc page; these are based on the nesting of the post in the <a href={`${configDocsPath}menus/#sidebar-menu`}>sidebar menu</a> defined by you. The links to the previous and next docs at the bottom of the doc page are also determined by this sidebar menu.
+Docs are MDX files that are displayed using the Doc page component. Docs can be navigated in the sidebar. A doc includes breadcrumb links at the top of the page (nested according to the <a href={`${configDocsPath}menus/#sidebar-menu`}>sidebar menu</a> defined by you). The links to the previous and next docs at the bottom of the doc page are also determined by this sidebar menu.
 
 A table of contents (using the TOC component) also appears for each doc.
 
-You can customize how all docs appear using the appropriate <a href={themeOptionsFragment}>theme option</a>, such as `alwaysShowTOC`. You can customize an individual doc using the corresponding frontmatter field, such as `showTOC`.
+You can customize how all docs appear using the appropriate <a href={themeOptionsFragment}>theme option</a>, such as `alwaysShowTOC`. You can customize an individual doc using the corresponding <a href={`${configDocsPath}site-options/#frontmatter`}>frontmatter</a> field, such as `showTOC`.
 
 To create a doc, create an MDX file in `src/docs` (or the `docsPath` defined in the <a href={themeOptionsFragment}>theme options</a>):
 

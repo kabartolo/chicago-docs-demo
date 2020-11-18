@@ -26,7 +26,7 @@ You can further organize your docs within the `src/docs` folder, such as `src/do
 
 Place assets such as images and your site logo in `src/assets`, or the `assetsPath` defined in the <a href="#theme-options">theme options</a>.
 
-The `src/mdxPages` directory, or the `pagesPath` defined in the <a href="#theme-options">theme options</a>, contains the non-docs MDX pages on your site. Any MDX files in this folder will use the Page template, which has access to all Chicago Docs components.
+The `src/mdxPages` directory, or the `pagesPath` defined in the <a href="#theme-options">theme options</a>, contains the non-docs MDX pages on your site. Any MDX files in this folder will use the Page template, which has access to most Chicago Docs components ([PostList](/docs/components-and-hooks/#postlist) and [TOC](/docs/components-and-hooks/#toc) will work only with Doc posts).
 
 ---
 
@@ -188,7 +188,7 @@ module.exports = {
 
 ## Frontmatter
 
-The frontmatter fields for a Chicago Docs doc post include `title` and `description` values and boolean values that determine whether to display the table of contents or another feature.
+The frontmatter fields for a Chicago Docs doc post include `title` and `description` values and boolean values that determine whether to display the table of contents or another feature for an individual post.
 
 <PropertyTable title="Frontmatter fields">
 

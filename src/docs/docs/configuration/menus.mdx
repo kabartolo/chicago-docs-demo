@@ -71,15 +71,9 @@ The sidebar menu lists the files that make up your project's documentation. This
 
 When displayed in the sidebar, the menu can organize doc files into **groups** (i.e., accordions) that can be expanded and collapsed. This helps make it easy to navigate your docs.
 
-By default, single posts are also displayed as accordions that expand to show part of their table of contents. To disable this, set `sidebarAllowTOC` to `false` in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. Also by default, multiple accordions can be open at the same time. You can disable this by setting `sidebarAllowMultipleOpen` to `false` (only one accordion will thenbe open at a time).
+By default, single posts are also displayed as accordions that expand to show part of their table of contents. To disable this, set `sidebarAllowTOC` to `false` in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. Also by default, multiple accordions can be open at the same time. You can disable this by setting `sidebarAllowMultipleOpen` to `false` (then only one accordion will be open at a time).
 
-You can also change the nested accordion depth with `sidebarDepth` (default: 3) in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. This is the total depth including groups and table of contents.
-
-<Alert>
-
-Groups and single posts can be styled differently to visually distinguish them. <a href="/docs/styling-and-shadowing/#theme-ui">Shadow</a> the Theme-UI `links.accordion` and `links.accordionGroup` values to adjust accordion link and group styles, respectively.
-
-</Alert>
+You can also change the nested accordion depth with `sidebarDepth` (default: `3`) in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>. This is the total depth including groups and table of contents.
 
 To create a sidebar menu, add an array called `sidebarMenus` to the `gatsby-config.js` options. This array is a list of objects with the following properties:
 
@@ -93,7 +87,7 @@ To create a sidebar menu, add an array called `sidebarMenus` to the `gatsby-conf
 | `sidebarLabel` | string | optional | value of `name` | Label appearing in the sidebar header (e.g., `'Tutorials'`). Useful when there are multiple sidebar menus. If omitted, uses the value of the `name` field. If set to `''` (empty string), the sidebar header will not render. |
 | `dropdownLabel` | string | optional | value of `name` | Label appearing in the dropdown docs menu on mobile (e.g., `'Menu'`). If omitted, uses the value of the `name` field. If set to `''` (empty string), no label will appear. |
 | `slug` | string | optional | `''` (empty string) | The directory **within** <a href="/docs/configuration/site-options/#theme-options">`docsPath`</a> containing the docs for this menu (e.g., `'tutorials'` for `src/docs/tutorials`). |
-| `items` | string | optional | |  List of docs in custom order to be displayed in the menu. If omitted, the sidebar will be populated automatically from the `slug` directory, but nested groups can be created only from nested directories with an `index.mdx` file. |
+| `items` | string | optional | |  List of docs in custom order to be displayed in the menu. If omitted, the sidebar will be populated automatically from the `slug` directory. However, nested groups must contain an `index.mdx` file to be created automatically. |
 
 </PropertyTable>
 
@@ -133,7 +127,7 @@ module.exports = {
             slug: 'tutorials',
             dropdownLabel: 'Menu',
             items: [
-              //...
+              // see example below
             ],
           }, 
         ],
@@ -156,7 +150,7 @@ Each item in the `items` list can have the following properties:
 
 | Name | Type | Info | Default | Description |
 | --- | --- | --- | --- | --- |
-| `name` | string | optional | value of frontmatter `shortTitle` or `title` for the doc (or for the `index.mdx` file of a group) | Label for the doc or group of docs in the sidebar (e.g., `'Gatsby Tutorials'`). Also used in the breadcrumb link for this part of the path. |
+| `name` | string | optional | value of frontmatter `shortTitle` or `title` | Label for the doc or group of docs in the sidebar (e.g., `'Gatsby Tutorials'`). Also used in the breadcrumb link for this part of the path. For an automatically created group, this name defaults to the `shortTitle` or `title` of its `index.mdx`. |
 | `slug` | string | required | | Slug for a single doc (e.g., `'how-to-write-tutorials'`) or the directory for a group of docs (e.g., `'jekyll'`).
 | `isGroup` | boolean | optional | `false` | Whether this item represents a directory of docs. |
 | `items` | object[] | optional | all docs in `slug` directory | List of docs in custom order to be displayed in the menu. If omitted, all docs in this directory are added automatically. |
@@ -245,12 +239,12 @@ You can define multiple sidebar menus for different parts of your site, grouped 
 
 <TwoColumnSection>
 
-In this example, the first sidebar menu will appear for any docs with a base path of `/docs` (e.g., `example.com/docs/gatsby/mdx-guide`, while the second will appear for any docs with a base path of `/tutorials` (e.g., `example.com/tutorials/how-to-write-tutorials`):
+In this example, the first sidebar menu will appear for any docs with a base path of `/documentation` (e.g., `example.com/docs/documentation/gatsby/mdx-guide`, while the second will appear for any docs with a base path of `/tutorials` (e.g., `example.com/docs/tutorials/how-to-write-tutorials`):
 
-```
+```sh {3,10}
 src
 ├───docs
-    ├── docs
+    ├── documentation
     │   ├── gatsby
     │   │   ├── index.mdx
     │   │   ├── mdx-guide.mdx
@@ -274,7 +268,7 @@ src
 
 <CodeExample title="site/gatsby-config.js" labels={[ 'JavaScript' ]}>
 
-```js {8,24}
+```js {9,24}
 module.exports = {
   plugins: [
     {
@@ -283,8 +277,7 @@ module.exports = {
         sidebarMenus: [
           {
             name: 'Documentation',
-            sidebarLabel: 'Docs',
-            slug: 'docs',
+            slug: 'documentation',
             items: [
               {
                 slug: 'overview',

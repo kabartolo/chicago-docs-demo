@@ -7,7 +7,7 @@ description: 'List of React components available to MDX files and hooks availabl
 
 ## Overview
 
-This section lists the React components that are available to the MDX files in the `src/docs` directory (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) of your Chicago Docs site. It also lists the available hooks that can be used in custom components to fetch data about your docs.
+This section lists the React components that are available to MDX files in the `src/docs` directory (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) of your Chicago Docs site. It also lists the available hooks that can be used in custom components to fetch data about your docs.
 
 <Alert>
 
@@ -19,17 +19,19 @@ All components described on this page are available automatically to all MDX fil
 
 ## Chicago Docs Components
 
-Chicago Docs comes with several components that help make it quick and easy for your users to find information on your product or API. Features such as site search and sidebar navigation mean your users won't get frustrated trying to find what they need.
+Chicago Docs comes with several components that help make it quick and easy for your users to find information on your product or API. Features such as site search and sidebar navigation mean your users won't get frustrated trying to find what they need. This section provides usage examples and a list of props accepted by each component.
 
 <TwoColumnSection>
 
 ### Terminology
 
-In this section, a *child* is a block of Markdown text between JSX tags (shortcodes); these blocks of text are passed to the React component as a prop called `children`. There should be a blank line above and below each Markdown child.
+React components are added to MDX files using JSX tags (e.g., the `<Alert>` tag inserts the Alert component). In this section, a **child** is a block of Markdown text between JSX tags. These blocks of text are passed to the React component as a prop called `children`. There should be a blank line above and below each block of text.
 
-A *prop* is a value passed to the React component directly.
+A **prop** is a value passed to the React component directly.
 
-In the following example, the text `"Attention!"` is a child of the Alert component, and `variant` is a prop (the string `"warning"` will be passed to the component to determine the background color of the Alert box).
+In the following example, the text `"Please pay attention to me!"` is a child of the Alert component. The component displays this text inside the colored box.
+
+On the other hand, `variant` is a prop; its value (`"warning"`) is passed to the component to determine the background color of the Alert box (in this case, orange).
 
 See also <a href="/docs/mdx-guide/mdx-guide/#jsx-syntax">Guide to MDX: JSX Syntax</a>.
 
@@ -130,6 +132,12 @@ curl -s 'https://hipsum.co/api/?type=hipster-centric&sentences=3'
 </CodeExample>
 ````
 
+<Alert>
+
+This component might look different in the live preview above than it would on a real site. See real examples of the CodeExample component in the [Example API Doc](/docs/example-api-doc).
+
+</Alert>
+
 <PropertyTable title="CodeExample props">
 
 | Name | Type | Info | Default | Description |
@@ -152,7 +160,15 @@ This component is meant to be used in MDX files only, as it expects code blocks 
 
 ### ExternalLink
 
-This component creates an external link that opens in a new tab, which is indicated by an external-window icon. This component is used automatically in docs for any <a href="/docs/mdx-guide/mdx-guide/#links">Markdown or HTML links</a> with an `href` attribute starting with `'http'`. For example, `<a href="https://en.wikipedia.org">Wikipedia</a>` becomes <a href="https://en.wikipedia.org">Wikipedia</a>. You can also use the component directly if you prefer:
+This component creates an external link that opens in a new tab, which is indicated by an external-window icon. This component is used automatically in docs for any <a href="/docs/mdx-guide/mdx-guide/#links">Markdown or HTML links</a> with an `href` attribute starting with `'http'`:
+
+```mdx live
+
+[Wikipedia](https://en.wikipedia.org)
+
+```
+
+ You can also use the component directly if you prefer:
 
 ```mdx live
 <ExternalLink href="https://en.wikipedia.org/wiki/Cats_and_the_Internet">Cats and the Internet</ExternalLink>
@@ -162,7 +178,7 @@ This component creates an external link that opens in a new tab, which is indica
 
 | Name | Type | Info | Default | Description |
 | ---- | ---- | ---- | ------- | ----------- |
-| `href` | string | required | | External URL that will open in a new tab when the component is clicked.|
+| `href` | string | required | | External URL that will open in a new tab when the link is clicked.|
 | `showIcon` | boolean | optional | `true` | Whether to show the new-window icon. You might not want the icon for non-text links such as images.
 | `children` | React node | required | | MDX text placed between ExternalLink tags, used to display the link.|
 
@@ -240,7 +256,13 @@ This table component provides a neat way of listing the properties or attributes
 </PropertyTable>
 ```
 
-*Note.* If a value for the `Default` column is included, it will appear following the string `'default:'`. You can get around this by omitting a default value and adding it elsewhere:
+<Alert>
+
+If the required headers are not provided, a regular Markdown table will be rendered.
+
+</Alert>
+
+If a value for the `Default` column is included, it will appear following the string `'default:'`. You can get around this by omitting a default value and adding it elsewhere:
 
 ```mdx live
 <PropertyTable title="Resource properties">
@@ -265,9 +287,9 @@ The TOC component works with MDX files of type Doc that have a table of contents
 
 </Alert>
 
-The TOC component is added automatically to MDX files in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) when the <a href="/docs/configuration/site-options/#theme-options">`alwaysShowTOC`</a> theme option is set to `true`. This can be overriden by the `showTOC` <a href="/docs/configuration/site-options/#frontmatter">frontmatter field</a> for an individual post.
+The TOC component is added automatically to MDX files in `src/docs` (or the `docsPath` defined in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) when the <a href="/docs/configuration/site-options/#theme-options">`alwaysShowTOC`</a> theme option is set to `true`. This can be overriden by the `showTOC` <a href="/docs/configuration/site-options/#frontmatter">frontmatter field</a> for an individual doc.
 
-You can also insert a TOC component in a doc directly. It will produce a TOC for the current file.
+You can also insert a TOC component in a doc directly. It will produce a TOC for the current file:
 
 ```mdx live
 <TOC depth={2} />
@@ -279,7 +301,7 @@ You can also insert a TOC component in a doc directly. It will produce a TOC for
 | ---- | ---- | ---- | ------- | ----------- |
 | `depth` | number | optional | `6` | Depth of nested items to print (between `2` and `6`). |
 | `contents` | object | optional | `null` | Custom table of contents with the following shape: `{ items: [{ title: '', url: '' }] }`. Used by other components. |
-| `title` | string | optional | `''` (empty string) | Title displayed above list of contents. |
+| `title` | string | optional | `''` (empty string) | Title displayed above the list of contents. |
 | `className` | string | optional | `''` (empty string) | Class name added to the outer `div` tag, which also has a class name of `'toc-container'`. |
 
 </PropertyTable>
@@ -320,7 +342,7 @@ Another paragraph.
 
 <TwoColumnSection>
 
-The TwoColumnSection component creates a `<section>` HTML tag and is styled in a two-column layout where the left column scrolls and the right column is sticky on wide screens. On smaller screens, the second column appears below the first column and is not sticky. The best use for this component is to organize API methods. Describe the method in the left column, and provide request and response examples (or other content) that remain stickied on the right.
+The TwoColumnSection component creates a `<section>` HTML tag that is styled in a two-column layout, where the left column scrolls and the right column is sticky on wide screens. On smaller screens, the second column appears below the first column and is not sticky. The best use for this component is to organize API methods. Describe the method in the left column, and provide request and response examples (or other content) that remain stickied on the right.
 
 <PropertyTable title="TwoColumnSection props">
 
@@ -435,9 +457,9 @@ There are three link types with different behaviors on a Chicago Docs site:
 
 | Type | Behavior | Path | Component | Example |
 | ---- | -------- | ---- | --------- | ------- |
-| <a href="https://www.gatsbyjs.com/docs/linking-between-pages/#using-a-for-external-links">External link</a> | Opens in a new tab and includes a new-window icon | Starts with `'http'` | <a href="#externallink">ExternalLink</a> | [GitHub](https://www.github.com) |
-| Internal link | Navigates to other pages on the same site without a page refresh | Relative path (e.g., `/docs/quick-start/`) | <a href="https://www.gatsbyjs.com/docs/gatsby-link/">Gatsby Link</a> | [Quick Start](/docs/quick-start/) |
-| Fragment link | Jumps to a different location on the same page without a page refresh | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Code](#code) | 
+| <a href="https://www.gatsbyjs.com/docs/linking-between-pages/#using-a-for-external-links">External link</a> | Opens in a new tab and includes a new-window icon. | Starts with `'http'` | <a href="#externallink">ExternalLink</a> | [GitHub](https://www.github.com) |
+| Internal link | Navigates to other pages on the same site without a page refresh. | Relative path (e.g., `/docs/quick-start/`) | <a href="https://www.gatsbyjs.com/docs/gatsby-link/">Gatsby Link</a> | [Quick Start](/docs/quick-start/) |
+| Fragment link | Jumps to a different location on the same page without a page refresh. | Fragment path (e.g., `#theme-ui-components`) | `<a>` tag | [Code](#code) | 
 
 Create a Markdown link in an MDX file, and the appropriate link type will be used:
 
@@ -523,7 +545,7 @@ if (Array.isArray(languages)) {
 Indicate the lines to be highlighted by adding them between curly braces (`{}`) to the metastring for the code block. To add separate line numbers, use commas (`,`). Do not add spaces between commas. To indicate a range of lines, use a hyphen (`-`):
 
 ````mdx live
-```js {1,2,5-7}num
+```js {1,3,5-7}num
 if (Array.isArray(languages)) {
   languages.forEach((language) => {
     if (languages[language]) {
@@ -569,7 +591,7 @@ Use these hooks in your custom components to fetch data:
 | useLocation | | Fetches the browser's `location` object. | No |
 | usePrismTheme | | Fetches the current Prism theme (according to the current color mode). | No |
 | useSiteMetadata | | Fetches the site metadata defined in `gatsby-config.js`. | Yes |
-| useTableOfContents | `{ depth = 6, docId = '', path = '' }` | Fetches the table of contents for all docs in an array of objects, each object including the doc `id`, a `nested` object, and a `flatMap` array. Pass the `docId` or current `path` to get the object for a specific doc. The `depth` value specifies the depth of the `nested` object (does not affect `flatMap`). | Yes |
+| useTableOfContents | `{ depth = 6, docId = '', path = '' }` | Fetches the table of contents for all docs in an array of objects. Each object contains the doc `id`, a `nested` object of nested headers, and a `flatMap` array of all headers. Pass the `docId` or current `path` to get the contents for a specific doc. The `depth` value specifies the depth of the `nested` object (does not affect `flatMap`). | Yes |
 | useThemeOptions | | Fetches the Chicago Docs theme options defined in `gatsby-config.js`. | Yes |
 
 The `useDocData` hook returns an array of nodes with the following information about each doc:
