@@ -2,6 +2,7 @@
 | --- | --- | --- | --- | --- |
 | `assetsPath` | string | optional | `'src/assets'` | Directory for all assets used in your site. |
 | `basePath` | string | optional | `''` (empty string) | Base path of your docs site, such as `/docs`. |
+| `basePathLabel` | string | optional | `'Home'` | Label for base path in breadcrumb links. |
 | `docsPath` | string | optional | `'src/docs'` |  Directory for all MDX docs for your site (i.e., MDX files that should use the Doc page component). |
 | `pagesPath` | string | optional | `'src/pages'` |  Directory for your site's pages (i.e., MDX files that should use the Page page component). |
 | `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |

@@ -27,7 +27,7 @@ To install the **starter** and create a **new site**, run:
 <CodeExample title="Install the starter">
 
 ```
-gatsby new your-site-name @kabartolo/gatsby-starter-chicago-docs
+gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs
 ```
 
 </CodeExample>
@@ -37,7 +37,7 @@ If you just want the data without the components or styling, use the **core star
 <CodeExample title="Install the core starter">
 
 ```
-gatsby new your-site-name @kabartolo/gatsby-starter-chicago-docs-core
+gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs-core
 ```
 </CodeExample>
 
@@ -210,6 +210,7 @@ module.exports = {
       options: {
         assetsPath: 'src/assets',
         basePath: '/',
+        basePathLabel: 'Home',
         docsPath: 'src/docs',
         pagesPath: 'src/mdxPages',
         sidebarDepth: 3,

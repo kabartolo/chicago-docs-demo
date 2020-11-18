@@ -14,13 +14,13 @@ This guide gets you set up quickly if you're already familiar with Gatsby. It as
 To install the **starter** and create a **new site**, run:
 
 ```
-gatsby new your-site-name @kabartolo/gatsby-starter-chicago-docs
+gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs
 ```
 
 If you just want the data without the components or styling, use the **core starter** to start a docs site from scratch:
 
 ```
-gatsby new your-site-name @kabartolo/gatsby-starter-chicago-docs-core
+gatsby new your-site-name https://github.com/kabartolo/gatsby-starter-chicago-docs-core
 ```
 
 ### Add to an existing site
@@ -183,6 +183,7 @@ This table gives the name of each theme option, its type, whether it is optional
 | --- | --- | --- | --- | --- |
 | `assetsPath` | string | optional | `src/assets` | Directory for all assets used in your site. |
 | `basePath` | string | optional | `''` (empty string) | Base path of your docs site, such as `/docs`. |
+| `basePathLabel` | string | optional | `'Home'` | Label for base path in breadcrumb links. |
 | `docsPath` | string | optional | `src/docs` |  Directory for all MDX docs for your site (i.e., MDX files that should use the Doc page component). |
 | `pagesPath` | string | optional | `'src/mdxPages'` |  Directory for your site's pages (i.e., JavaScript pages or MDX files that should use the Page page component). |
 | `mainMenu` | array of objects | optional | `[]` | List of menu items that will appear in the header (see <a href="https://kabartolo.github.io/chicago-docs-demo/docs/configuration/menus/#main-menu">Configuration: Main Menu</a>). |
@@ -211,6 +212,7 @@ module.exports = {
       options: {
         assetsPath: 'src/assets',
         basePath: '/',
+        basePathLabel: 'Home',
         docsPath: 'src/docs',
         sidebarDepth: 3,
         allowDocsSearch: true,
