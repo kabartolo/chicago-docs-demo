@@ -15,7 +15,7 @@ This theme comes with a docs search that is designed for small sites. If your do
 
 ## How the Theme Search Works
 
-During the build process, an index of paragraphs and headers is created for each post. These data, along with the post's title and description, are used by [`gatsby-plugin-elasticlunr-search`](https://www.gatsbyjs.com/plugins/@gatsby-contrib/gatsby-plugin-elasticlunr-search/) to build a search index for the site. This index is stored in `allSiteSearchIndex` in GraphQL.
+During the build process, an index of paragraphs and headers is created for each post. These data, along with the post's title and description, are used by [`gatsby-plugin-elasticlunr-search`](https://www.gatsbyjs.com/plugins/@gatsby-contrib/gatsby-plugin-elasticlunr-search/) to build a search index for the site. This index can be fetched using the GraphQL query `allSiteSearchIndex`.
 
 Only posts living in `src/docs` (or the `docsPath` set in the <a href="/docs/configuration/site-options/#theme-options">theme options</a>) are indexed.
 
@@ -50,7 +50,7 @@ There are faster and more robust solutions to documentation search out there. I 
 
 To use a different search interface, 
 
-1. Set `allowDocsSearch` to false in the `gatsby-config.js` theme options. This prevents the theme from fully populating the search index stored in GraphQL and from showing the theme searchbar.
+1. Set `allowDocsSearch` to false in the `gatsby-config.js` theme options. This prevents the theme from fully populating the search index and from showing the theme searchbar.
 
 2. <a href="/docs/styling-and-shadowing/#component-example">Shadow</a> the Search component to create one that works with your custom library. For example, <a href="https://docsearch.algolia.com/docs/dropdown/">Algolia</a> provides functions and components to display its search results.
 
