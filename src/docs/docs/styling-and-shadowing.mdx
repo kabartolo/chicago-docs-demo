@@ -7,11 +7,23 @@ description: "Customizing and shadowing the theme's styles and components"
 
 ## Overview
 
-The libraries used to style Chicago Docs components were chosen to make the site easy to customize for the largest number of users. You can re-style components using plain CSS or SASS. You can also style and customize components directly using Theme-UI or JavaScript.
+Chicago Docs was designed to be as easy as possible to customize for the largest number of users. You can re-style components using plain CSS or SASS. You can also can style and customize components using JavaScript and Theme-UI.
 
-Customizing, altering, or replacing the styles and components of a Gatsby theme is called <a href="https://www.gatsbyjs.com/docs/how-shadowing-works/#reach-skip-nav">shadowing</a>. Shadowing a theme file means creating a file with the same name in your site directory that will override the one from the theme.
+In Gatsby, customizing, altering, or replacing styles and components is called <a href="https://www.gatsbyjs.com/docs/how-shadowing-works/#reach-skip-nav">shadowing</a>. Shadowing a theme file means creating a file in your site directory that will override the one from the theme. 
 
-The new file you create should live in your site's `src` folder, in a directory with the same name as the theme you're shadowing. For example, to shadow the Chicago Docs <a href="/docs/components-and-hooks/#alert">Alert</a> component, which has a file path of `@kabartolo/gatsby-theme-chicago-docs/src/components/Alert/index.js`, create the following folder structure in your site:
+To shadow a file, the new file should have the same name as the one you're shadowing but a slightly different file path. If the file path in the original theme is **`theme-name/src/`**`components/Alert/index.js`, the shadowed file path should be **`your-site/src/theme-name/`**`components/Alert/index.js`. 
+
+ For example, the Chicago Docs <a href="/docs/components-and-hooks/#alert">Alert</a> component has a file path of 
+
+```
+@kabartolo
+└── gatsby-theme-chicago-docs
+    └── src
+        └── components
+            └── Alert
+                └──index.js
+```
+To shadow the Alert component, create a file with the following path in your site directory:
 
 ```
 your-site
@@ -25,17 +37,13 @@ your-site
 
 </TwoColumnSection>
 
-<Alert>
-
-If the file path in the original theme is **`theme-name/src/`**`components/Alert/index.js`, the shadowed file path should be **`your-site/src/theme-name/`**`components/Alert/index.js`. 
-
-</Alert>
-
 <TwoColumnSection>
 
-## Component Example
+## Components
 
-The <a href="/docs/components-and-hooks/#alert">Alert</a> component creates a colored box around the text you provide it. In the live preview below, try deleting `variant="error"`. With no variant specified, the Alert component will use the default color variant `information`, which is blue.
+React components in a Gatsby theme can be shadowed as described in the previous section.
+
+As an example,  the <a href="/docs/components-and-hooks/#alert">Alert</a> component can be shadowed to change its default color variant. The <a href="/docs/components-and-hooks/#alert">Alert</a> component creates a colored box around the text you provide it. In the live preview below, try deleting `variant="error"`. With no variant specified, the Alert component will use the default color variant `information`, which is blue.
 
 ```mdx live
 
@@ -46,7 +54,7 @@ Try deleting `variant="error"` in the editor below to see the default color vari
 </Alert>
 
 ```
-What if you wanted to use the `error` variant as the default color instead? This example will show you how to shadow the Alert component and change its default color variant.
+To change the default color to the `error` variant instead, do the following:
 
 1. In your site directory, create an `index.js` file with a path as shown:
 
@@ -95,7 +103,7 @@ Alert.defaultProps = {
 
 </CodeExample>
 
-3.  Since your site doesn't have an `alert.module.scss` file (see Line 5 above), import it from `@kabartolo/gatsby-theme-chicago-docs`:
+3.  Line 5 above will cause a ReferenceError if `alert.module.scss` doesn't exist in this file's directory. Import this file from `@kabartolo/gatsby-theme-chicago-docs` instead:
 
 <CodeExample title="your-site/src/@kabartolo/.../index.js" labels={['JSX']}>
 
@@ -147,9 +155,7 @@ Alert.defaultProps = {
 
 </CodeExample>
 
-Now all Alert boxes that don't specify a variant will use the `error` color scheme (red).
-
-This process can be applied to shadowing any theme file.
+All Alert boxes that don't specify a variant will now use the `error` color scheme (red).
 
 </TwoColumnSection>
 
@@ -159,7 +165,7 @@ This process can be applied to shadowing any theme file.
 
 ### Overview
 
-Most styles in this theme are defined using <a href="https://sass-lang.com/">SASS</a> in <a href="https://github.com/css-modules/css-modules">CSS modules</a>. Chicago Docs has also added **regular class names** to components. While this section describes how to shadow CSS module files, you can instead create a CSS file for your site and override the styles by selecting these class names. See [Global styles](#global-styles) below.
+Most styles in this theme are written in <a href="https://sass-lang.com/">SASS</a> and defined in <a href="https://github.com/css-modules/css-modules">CSS modules</a>. See [Global styles](#global-styles) below to work with regular CSS files.
 
 Most components in this theme have a corresponding CSS module, and there is also a global SASS file where the SASS variables are defined. 
 
@@ -224,9 +230,9 @@ Note that the 'list-item' class from the List module will be called something li
 
 ### Shadowing
 
-Shadowing is the best way to alter CSS-module styles. For example, to change the padding on a component called Toggle, do the following:
+Shadowing is the best way to alter CSS-module styles. For example, to change the padding on the Toggle component, do the following:
 
-1. Create a new `toggle.module.scss` file in your site folder with the following path:
+1. Create a new `toggle.module.scss` file in your site folder with the path of the Toggle component:
 
 ```
 your-site
@@ -247,20 +253,22 @@ your-site
 @import '@kabartolo/gatsby-theme-chicago-docs/src/styles/_global.scss';
 
 .button {
-  padding: $toggle-padding;
+  padding: $toggle-padding-variant;
   cursor: pointer;
 }
 ```
 
 </CodeExample>
 
-The Toggle component's padding value has now changed to the value of `$toggle-padding`.
+The Toggle component's padding value has now changed to the value of `$toggle-padding-variant`.
 
 ### Global styles
 
-If you need to make several style changes throughout the site, you can create a stylesheet and import it into a [shadowed](#component-example) Layout component. The Layout component handles the global styles for the site. See <a href="https://www.gatsbyjs.com/docs/global-css/">Standard Styling with Global CSS files</a> for guidance.
+All Chicago Docs components contain **regular class names** in addition to CSS-module class names. You can create a custom stylesheet for your site and override any style by selecting the appropriate class name.
+ 
+To make several style changes throughout the site, create a stylesheet and import it into a [shadowed](#component-example) Layout component. The Layout component handles the global styles for the site. See <a href="https://www.gatsbyjs.com/docs/global-css/">Standard Styling with Global CSS files</a> for guidance.
 
-To make just a few changes, you could instead [shadow](#shadowing) just the Layout's CSS module file (`layout.module.scss`) and reference global class names using `:global(.class-name)`:
+To make just a few changes, [shadow](#shadowing) just the Layout's CSS module file (`layout.module.scss`) and reference global class names using `:global(.class-name)`:
 
 <CodeExample title="your-site/src/@kabartolo/.../layout.module.scss" labels={['SASS']}>
 
@@ -370,21 +378,7 @@ The Theme-UI files for Chicago Docs can be shadowed like any other file. Refer t
 
 </CodeExample>
 
-Let's say you want to change the colors used for one of the Alert component's variants, such as `warning`. The light-theme and dark-theme variants are defined at `colors.warningBackground` and `colors.modes.dark.warningBackground`, respectively, in the Theme-UI object. 
-
-This variant is shown in the live preview below:
-
-```mdx live
-
-<Alert variant="warning">
-
-Change `"warning"` to `"error"` to see how the color changes based on the `variant` value.
-
-</Alert>
-
-```
-
-This example will change the background color of the Alert component's `warning` variant for both light and dark theme modes:
+The background colors for the <a href="/docs/components-and-hooks/#alert">Alert</a> component's `warning` variant are defined in `colors.warningBackground` and `colors.modes.dark.warningBackground` for the light and dark theme modes, respectively. This example will change these background colors:
 
 1. To shadow the Theme-UI file, in the root of your site folder, create a file called `index.js` with the following path:
 
@@ -395,7 +389,7 @@ your-site
         └── index.js
 ```
 
-2. To avoid having to copy and paste the entire theme object, import the base theme and the `merge` function:
+2. To avoid having to copy and paste the entire theme object, import the base theme and Theme-UI's `merge` function:
 
 <CodeExample title="your-site/src/gatsby-plugin-theme-ui/index.js" labels={['JavaScript']}>
 
@@ -498,7 +492,7 @@ Typography on the site should now match the `funston` theme.
 
 <Alert>
 
-You might notice the typography of some site components doesn't change upon changing the Typography.js theme. You might need to add these styles manually using Theme-UI's [`sx` prop](https://theme-ui.com/sx-prop/).
+You might notice the typography of some site components doesn't change. You can add these styles manually to components using Theme-UI's [`sx` prop](https://theme-ui.com/sx-prop/).
 
 </Alert>
 
@@ -510,7 +504,7 @@ You might notice the typography of some site components doesn't change upon chan
 
 ### Prism-JS
 
-The theme currently uses the `nightOwl` and `nightOwlLight` <a href="https://prismjs.com/">Prism.js</a> presets. They are used for the `dark` and `default` (light) color modes, respectively. These presets are listed in the `prism` key of the Theme-UI object.
+The theme currently uses the `nightOwl` and `nightOwlLight` code-highlighting presets from <a href="https://prismjs.com/">Prism.js</a>. They are used for the `dark` and `default` (light) color modes, respectively. These presets are listed in the `prism` key of the Theme-UI object.
 
 For example, to change these presets respectively to `duotoneDark` and `duotoneLight`,
 

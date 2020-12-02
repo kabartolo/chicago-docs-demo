@@ -482,8 +482,8 @@ Code blocks can be added to your docs using markdown syntax:
 
 ````mdx live
 ```js
-() => {
-  return ...
+const helloWorld = () => {
+  return 'Hello, World!'
 }
 ```
 ````
@@ -508,7 +508,7 @@ This section describes how to add line highlighting, line numbers, and live prev
 
 <Alert variant="warning">
 
-You need to specify the **language** in order for the metastring value to be used. For example, ```` ``` {3} ```` will not produce line highlighting. If you don't want any Prism code highlighting but want to add line highlighting or other features, you can use the 'shell' language:
+You need to specify the **language** in order for the metastring value to be used. For example, ```` ``` {3} ```` will not produce line highlighting. If you don't want any Prism code highlighting but want to add line highlighting or other features, you can use the Shell language:
 
 ```` ```sh {3} ````
 
